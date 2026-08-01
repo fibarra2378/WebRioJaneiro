@@ -185,11 +185,17 @@ img {
   width: 92%;
   max-width: 1280px;
   z-index: 1000;
-  padding: 0.85rem 1.75rem;
+  padding: 0.75rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-radius: var(--radius-full);
+}
+
+.navbar-top-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .navbar:hover,
@@ -940,23 +946,28 @@ p, a, h1, h2, h3, h4, h5, h6, span, strong, div {
   word-break: break-word;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 992px) {
   /* Navbar Flotante de 2 filas en móvil (Fila 1: Logo + Theme Btn | Fila 2: Links completos) */
   .navbar {
-    width: 94%;
-    max-width: 94%;
-    top: 0.5rem;
-    padding: 0.6rem 0.85rem;
-    border-radius: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.35rem;
+    width: 94% !important;
+    max-width: 94% !important;
+    top: 0.5rem !important;
+    padding: 0.6rem 0.85rem !important;
+    border-radius: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.35rem !important;
+  }
+
+  .navbar-top-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
   }
 
   .logo {
-    order: 1;
     gap: 0.4rem;
   }
 
@@ -969,10 +980,6 @@ p, a, h1, h2, h3, h4, h5, h6, span, strong, div {
     font-size: 1rem;
   }
 
-  .nav-actions {
-    order: 2;
-  }
-
   .theme-toggle-btn {
     width: 32px;
     height: 32px;
@@ -980,41 +987,43 @@ p, a, h1, h2, h3, h4, h5, h6, span, strong, div {
   }
 
   .nav-links {
-    order: 3;
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    gap: 0.4rem;
-    overflow-x: auto;
-    white-space: nowrap;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    padding-top: 0.45rem;
-    margin-top: 0.15rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    gap: 0.35rem !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding-top: 0.45rem !important;
+    margin-top: 0.15rem !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
   }
 
   .nav-links::-webkit-scrollbar {
-    display: none;
+    display: none !important;
   }
 
   .nav-link {
-    font-size: 0.78rem;
-    padding: 0.3rem 0.65rem;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: var(--radius-full);
-    color: var(--text-main);
+    font-size: 0.78rem !important;
+    padding: 0.3rem 0.65rem !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-radius: var(--radius-full) !important;
+    color: var(--text-main) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.3rem !important;
   }
 
   .nav-link:hover,
   .nav-link.active {
-    background: var(--accent-teal);
-    color: #fff;
+    background: var(--accent-teal) !important;
+    color: #fff !important;
   }
 
   /* Ajustes del Hero y Secciones */
   .hero {
-    padding-top: 7rem;
+    padding-top: 7.5rem;
     padding-bottom: 3rem;
   }
 
@@ -1091,8 +1100,8 @@ p, a, h1, h2, h3, h4, h5, h6, span, strong, div {
 @media (max-width: 480px) {
   /* Samsung S22 y Pantallas Angostas (< 480px) */
   .navbar {
-    width: 95%;
-    padding: 0.5rem 0.75rem;
+    width: 95% !important;
+    padding: 0.5rem 0.75rem !important;
   }
 
   .section-title {
