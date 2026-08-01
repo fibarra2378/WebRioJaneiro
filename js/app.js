@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicialización
   initTheme();
   initLiveClock();
+  initCarousel();
   renderBaseServices();
   renderDayContent(state.activeDay);
   renderGuideTips();
@@ -275,5 +276,36 @@ document.addEventListener('DOMContentLoaded', () => {
         renderDayContent(state.activeDay);
       });
     }
+  }
+
+  /* ==========================================================
+     Controlador del Carrusel Interactivo de Imágenes
+     ========================================================== */
+  function initCarousel() {
+    const track = document.getElementById('carousel-track');
+    const prevBtn = document.getElementById('carousel-prev-btn');
+    const nextBtn = document.getElementById('carousel-next-btn');
+    const dots = document.querySelectorAll('.carousel-dot');
+
+    if (!track || !prevBtn || !nextBtn) return;
+
+    let currentIndex = 0;
+    const totalSlides = 2;
+
+    function goToSlide(index) {
+      currentIndex = (index + totalSlides) % totalSlides;
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentIndex);
+      });
+    }
+
+    prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+    nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => goToSlide(i));
+    });
+
+    setInterval(() => goToSlide(currentIndex + 1), 5000);
   }
 });

@@ -29,7 +29,8 @@ REQUIRED_FILES = [
     "assets/images/arpoador.png",
     "assets/images/selaron_steps.png",
     "assets/images/rio_gastronomy.png",
-    "assets/images/copacabana_posto2.png"
+    "assets/images/copacabana_posto2.png",
+    "assets/images/route_map_posto2.jpg"
 ]
 
 ITINERARY_KEYWORDS = [

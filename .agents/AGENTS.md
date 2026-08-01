@@ -1,54 +1,56 @@
 # Guía de Agentes y Flujo de Trabajo (WebRioJaneiro)
 
-Este proyecto cuenta con un equipo de agentes especializados que colaboran mediante un **Flujo de Trabajo Estándar e Iterativo (Frontend -> QA -> Fix Loop)** para cada cambio, actualización o nueva funcionalidad de la aplicación web.
+Este proyecto cuenta con un equipo de 3 agentes especializados (**Frontend Developer**, **QA Engineer** y **DevOps Engineer**) que colaboran mediante un **Flujo de Trabajo Estándar Integrado (Frontend -> QA -> DevOps -> Deploy)** para cada cambio, actualización o entrega.
 
 ---
 
-## 🔄 Flujo de Trabajo Estándar (Workflow Pipeline)
+## 🔄 Flujo de Trabajo Estándar Integrado (5 Fases)
 
 ```mermaid
 graph TD
     A[1. Solicitud de Cambio / Requerimiento] --> B[2. Frontend Developer Agent: Desarrollo & Audit Frontend]
-    B --> C[3. QA Engineer Agent: Ejecución de Test Suite & Auditoría]
+    B --> C[3. QA Engineer Agent: Suite de Pruebas & Calidad]
     C --> D{¿Defectos Detectados?}
-    D -- Sí --> E[4. Registro de Defectos en tests/defects_report.md]
-    E --> F[5. Frontend Developer Agent: Corrección de Defectos]
-    F --> C
-    D -- No --> G[6. Cierre Exitoso & tests/qa_report.md 100% PASS]
+    D -- Sí --> E[Registro de Defectos & Corrección Frontend]
+    E --> C
+    D -- No --> F[4. DevOps Engineer Agent: Pipeline CI/CD, Docker & Git]
+    F --> G[5. Despliegue Exitoso a Producción / GitHub Pages]
 ```
 
 ### Fase 1: Solicitud de Cambio (CR)
-- El requerimiento se analiza definiendo el alcance en la interfaz, datos o funcionalidades interactivas.
+- Se define el requerimiento, alcance visual y funcional.
 
 ### Fase 2: Desarrollo Front End (Frontend Developer Agent)
-- El **Frontend Developer Agent** implementa los cambios en `index.html`, `css/styles.css`, `js/data.js` o `js/app.js`.
-- Aplica las directivas de los skills `frontend-developer`, `ui-design-system`, `interactive-components` y `web-performance-a11y`.
-- Ejecuta la auditoría preliminar:
+- Implementación de código en HTML, CSS, JS o datos.
+- Ejecución de auditoría preliminar: `python scripts/frontend_audit.py`
+
+### Fase 3: Auditoría de Calidad (QA Engineer Agent)
+- Ejecución de suite de pruebas: `python scripts/qa_audit.py`
+- Emisión del reporte de calidad en `tests/qa_report.md`.
+
+### Fase 4: Integración y Despliegue (DevOps Engineer Agent)
+- El **DevOps Engineer Agent** toma el control para ejecutar la verificación de infraestructura:
   ```bash
-  python scripts/frontend_audit.py
+  python scripts/devops_audit.py
+  ```
+- Valida el build del contenedor Docker de producción, gestiona las ramas `dev` y `main`, y ejecuta el pipeline de CI/CD:
+  ```bash
+  python scripts/workflow_pipeline.py
   ```
 
-### Fase 3: Pruebas de Calidad (QA Engineer Agent)
-- El **QA Engineer Agent** toma el control para evaluar la entrega.
-- Ejecuta la suite automatizada de pruebas:
-  ```bash
-  python scripts/qa_audit.py
-  ```
-- Si detecta errores, crea el archivo de reporte de defectos en `tests/defects_report.md` clasificándolos en:
-  - **CRITICAL**: Errores que bloquean el servidor o rompen la carga de la página.
-  - **MAJOR**: Fallos en componentes interactivos, botones o discrepancias con el PDF de itinerario.
-  - **MINOR**: Desalineaciones menores de UI o etiquetas aria faltantes.
-
-### Fase 4: Ciclo de Corrección y Re-Prueba (Fix & Re-Test)
-- El **Frontend Developer Agent** lee `tests/defects_report.md` y aplica las correcciones.
-- El **QA Engineer Agent** re-ejecuta la suite hasta obtener el 100% PASS y emite el `tests/qa_report.md` oficial de aprobación.
+### Fase 5: Despliegue a Producción (GitHub Actions / Pages)
+- El DevOps Agent realiza el commit convencional (`feat:`, `fix:`, `ci:`) y sincroniza los cambios en las ramas `dev` y `main` para detonar el despliegue en GitHub Pages.
 
 ---
 
 ## 🎨 Rol del Frontend Developer Agent
-- **Responsabilidad**: Maquetación HTML5, estilos Glassmorphism CSS, JavaScript ES6+ e interactividad de la app.
+- **Responsabilidad**: Maquetación HTML5, estilos Glassmorphism CSS, JavaScript ES6+ e interactividad.
 - **Auditoría**: `python scripts/frontend_audit.py`
 
 ## 🛡️ Rol del QA Engineer Agent
 - **Responsabilidad**: Auditoría de calidad, responsividad, accesibilidad y fidelidad del itinerario.
 - **Auditoría**: `python scripts/qa_audit.py`
+
+## 🚀 Rol del DevOps Engineer Agent
+- **Responsabilidad**: Mantenimiento de infraestructura CI/CD (GitHub Actions), Dockerization, control de versiones Git (`dev` / `main`), automatización del pipeline y despliegues a producción.
+- **Auditoría**: `python scripts/devops_audit.py`

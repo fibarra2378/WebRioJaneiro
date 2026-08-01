@@ -100,16 +100,35 @@
       </div>
 
       <div class="glass-card" style="padding: 2rem; margin-bottom: 2.5rem; border-left: 6px solid var(--accent-teal);">
-        <div
-          style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
-          <div>
-            <h3 style="font-size: 1.6rem; font-weight: 800; color: var(--accent-teal);"><i
-                class="fa-solid fa-location-dot"></i> Departamento en Copacabana</h3>
-            <p style="font-size: 1.1rem; color: var(--text-main); margin-top: 0.25rem;"><strong>Rua Ministro Viveiros de
-                Castro, 75 ap 901</strong> — Copacabana, Posto 2</p>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+          <div style="flex: 1; min-width: 280px;">
+            <h3 style="font-size: 1.6rem; font-weight: 800; color: var(--accent-teal);"><i class="fa-solid fa-location-dot"></i> Departamento en Copacabana</h3>
+            <p style="font-size: 1.1rem; color: var(--text-main); margin-top: 0.25rem;"><strong>Rua Ministro Viveiros de Castro, 75 ap 901</strong> — Copacabana, Posto 2</p>
+            <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 0.5rem;"><i class="fa-solid fa-person-walking-luggage"></i> A solo 4 minutos a pie (290 metros) de la playa y a 1 cuadra de Praça do Lido.</p>
           </div>
-          <span class="section-badge" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald);">A 2
-            cuadras de la playa</span>
+          <!-- Carrusel Interactivo de Imágenes -->
+          <div class="carousel-wrapper" id="depto-carousel">
+            <div class="carousel-track" id="carousel-track">
+              <!-- Slide 1: Mapa de Ruta a Pie (Google Maps) -->
+              <div class="carousel-slide">
+                <img src="assets/images/route_map_posto2.jpg" alt="Mapa de Ruta a Pie - Depto a Posto 2 (4 min)">
+                <span class="carousel-badge"><i class="fa-solid fa-walking"></i> Ruta: 4 min (290m)</span>
+              </div>
+              <!-- Slide 2: Playa de Copacabana Posto 2 -->
+              <div class="carousel-slide">
+                <img src="assets/images/copacabana_posto2.png" alt="Playa de Copacabana - Posto 2">
+                <span class="carousel-badge"><i class="fa-solid fa-umbrella-beach"></i> Copacabana Posto 2</span>
+              </div>
+            </div>
+            <!-- Botones de Navegación del Carrusel -->
+            <button class="carousel-nav-btn carousel-nav-prev" id="carousel-prev-btn" aria-label="Imagen anterior"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="carousel-nav-btn carousel-nav-next" id="carousel-next-btn" aria-label="Siguiente imagen"><i class="fa-solid fa-chevron-right"></i></button>
+            <!-- Indicadores -->
+            <div class="carousel-dots" id="carousel-dots">
+              <span class="carousel-dot active" data-index="0"></span>
+              <span class="carousel-dot" data-index="1"></span>
+            </div>
+          </div>
         </div>
       </div>
 
