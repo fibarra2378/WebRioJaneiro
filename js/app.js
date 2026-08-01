@@ -93,14 +93,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!servicesGrid) return;
 
     servicesGrid.innerHTML = TRIP_DATA.generalInfo.baseOfOperations.nearbyServices.map(service => `
-      <div class="glass-card" style="padding: 1.5rem;">
-        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
-          <i class="fa-solid fa-store" style="color: var(--accent-gold); font-size: 1.25rem;"></i>
-          <h4 style="font-size: 1.15rem; font-weight: 700;">${service.name}</h4>
+      <div class="glass-card" style="padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+            <i class="${service.url ? 'fa-solid fa-bicycle' : 'fa-solid fa-store'}" style="color: var(--accent-gold); font-size: 1.25rem;"></i>
+            <h4 style="font-size: 1.15rem; font-weight: 700;">${service.name}</h4>
+          </div>
+          <span class="tag-mini" style="background: rgba(6,182,212,0.15); color: var(--accent-teal); margin-bottom: 0.5rem; display: inline-block;">${service.type}</span>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.5rem;"><i class="fa-solid fa-map-pin"></i> ${service.address}</p>
+          ${service.price ? `<p style="font-size: 0.88rem; color: var(--accent-gold); font-weight: 700; margin-bottom: 0.5rem;"><i class="fa-solid fa-ticket"></i> Precios: <strong>${service.price}</strong></p>` : ''}
+          <p style="font-size: 0.9rem; color: var(--text-main);">${service.desc}</p>
         </div>
-        <span class="tag-mini" style="background: rgba(6,182,212,0.15); color: var(--accent-teal); margin-bottom: 0.5rem; display: inline-block;">${service.type}</span>
-        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.5rem;"><i class="fa-solid fa-map-pin"></i> ${service.address}</p>
-        <p style="font-size: 0.9rem; color: var(--text-main);">${service.desc}</p>
+        ${service.url ? `
+          <div style="margin-top: 1rem;">
+            <a href="${service.url}" target="_blank" rel="noopener noreferrer" class="chip-btn active" style="display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; padding: 0.4rem 0.85rem; text-decoration: none;">
+              <i class="fa-solid fa-globe"></i> Web Oficial Bike Itaú <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
+            </a>
+          </div>
+        ` : ''}
       </div>
     `).join('');
   }
