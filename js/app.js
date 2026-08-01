@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicialización
   initTheme();
   initLiveClock();
+  initMobileMenu();
   initCarousel();
   renderBaseServices();
   renderDayContent(state.activeDay);
@@ -317,5 +318,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     setInterval(() => goToSlide(currentIndex + 1), 5000);
+  }
+
+  /* ==========================================================
+     Controlador del Menú Hamburguesa Móvil
+     ========================================================== */
+  function initMobileMenu() {
+    const menuToggleBtn = document.getElementById('mobile-menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    if (!menuToggleBtn || !navLinks) return;
+
+    menuToggleBtn.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('mobile-active');
+      const icon = menuToggleBtn.querySelector('i');
+      if (icon) {
+        icon.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+      }
+    });
+
+    // Cerrar el menú automáticamente al seleccionar una opción
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('mobile-active');
+        const icon = menuToggleBtn.querySelector('i');
+        if (icon) icon.className = 'fa-solid fa-bars';
+      });
+    });
   }
 });
