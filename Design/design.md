@@ -1,0 +1,2 @@
+Utiliza un diseño alegre, brillante y que exprese la alegria de la ciudad maravillosa, su musica y su gente.
+Mantén identidad visual de todo lo incorporado, haciendo que mantenga coherencia visual a lo largo de toda la web.

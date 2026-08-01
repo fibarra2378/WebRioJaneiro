@@ -1,0 +1,31 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE & Editor Configs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Antigravity / Gemini Workspace Metadata
+.gemini/
+*.log
+
+# Python Cache & Virtual Envs
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+venv/
+env/
+
+# Node & Build Outputs
+node_modules/
+dist/
+build/
+
+# Test Reports Local Overwrites
+tests/*.log

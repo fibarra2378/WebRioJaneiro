@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Guía e itinerario interactivo oficial de viaje a Río de Janeiro para 4 Amigos - Agosto 2026. Cronograma detallado día por día, mapa interactivo y consejos del guía.">
+  <title>Río de Janeiro 2026 - Itinerario 4 Amigos | Guía de Viaje</title>
+
+  <!-- Fuentes de Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Iconos de Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Mapa Interactivo Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- Estilos de la Aplicación -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <!-- Barra de Navegación Flotante -->
+  <nav class="navbar glass-card">
+    <a href="#" class="logo">
+      <div class="logo-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
+      <span>Rio2026 • 4Amigos</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#base-depto" class="nav-link">Base Copacabana</a></li>
+      <li><a href="#itinerary-section" class="nav-link">Itinerario 5 Días</a></li>
+      <li><a href="#guide-tips-section" class="nav-link">Tips del Guía</a></li>
+      <li><a href="#budget-calculator" class="nav-link">Presupuesto</a></li>
+      <li><a href="#map-section" class="nav-link">Mapa en Vivo</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button id="theme-toggle-btn" class="theme-toggle-btn" title="Cambiar Tema Claro/Oscuro"
+        aria-label="Modo de Color">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Sección Principal (Hero) -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <span class="section-badge"><i class="fa-solid fa-plane-arrival"></i> Agosto 2026 • Viaje de 4 Amigos</span>
+        <h1 class="hero-title">Río de Janeiro <span>Itinerario 2026</span></h1>
+        <p class="hero-desc">La guía y cronograma oficial para el viaje de 4 Amigos. Hospedados en el corazón de
+          Copacabana (Posto 2), explorando íconos, playas, fútbol, feijoada y samba de raíz.</p>
+
+        <!-- Widgets de Información Útil -->
+        <div class="hero-widgets">
+          <div class="widget-pill" id="rio-clock-widget">
+            <i class="fa-regular fa-clock widget-icon"></i>
+            <span>Hora en Río: <strong id="rio-clock-time">--:-- BRT</strong></span>
+          </div>
+          <div class="widget-pill">
+            <i class="fa-solid fa-temperature-three-quarters widget-icon" style="color: var(--accent-gold);"></i>
+            <span>Clima Esperado: <strong>18°C - 26°C (Suave y seco)</strong></span>
+          </div>
+          <div class="widget-pill">
+            <i class="fa-solid fa-house-user widget-icon" style="color: var(--accent-teal);"></i>
+            <span>Base: <strong>Copacabana Posto 2</strong></span>
+          </div>
+        </div>
+
+        <!-- Botones de Acción Rápida -->
+        <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="#itinerary-section" class="search-btn"
+            style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+            <i class="fa-solid fa-calendar-days"></i> Ver Cronograma por Día
+          </a>
+          <a href="#map-section" class="chip-btn active"
+            style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+            <i class="fa-solid fa-map-location-dot"></i> Ver Mapa de Rutas
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Base de Operaciones y Logística -->
+  <section class="section" id="base-depto">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-badge">Alojamiento & Alrededores</span>
+        <h2 class="section-title">Base de Operaciones</h2>
+        <p class="section-subtitle">Ubicación estratégica del departamento para el grupo de 4 amigos.</p>
+      </div>
+
+      <div class="glass-card" style="padding: 2rem; margin-bottom: 2.5rem; border-left: 6px solid var(--accent-teal);">
+        <div
+          style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h3 style="font-size: 1.6rem; font-weight: 800; color: var(--accent-teal);"><i
+                class="fa-solid fa-location-dot"></i> Departamento en Copacabana</h3>
+            <p style="font-size: 1.1rem; color: var(--text-main); margin-top: 0.25rem;"><strong>Rua Ministro Viveiros de
+                Castro, 75 ap 901</strong> — Copacabana, Posto 2</p>
+          </div>
+          <span class="section-badge" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald);">A 2
+            cuadras de la playa</span>
+        </div>
+      </div>
+
+      <div class="grid-3" id="services-grid">
+        <!-- Renderizado por JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección del Itinerario por Días (Navegador Interactivo) -->
+  <section class="section" id="itinerary-section" style="background: rgba(0,0,0,0.15);">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-badge">Cronograma Detallado</span>
+        <h2 class="section-title">Itinerario Día por Día</h2>
+        <p class="section-subtitle">Haz clic en cada día para desplegar los horarios, actividades, logística y
+          recomendaciones.</p>
+      </div>
+
+      <!-- Selector de Días en Pestañas -->
+      <div class="category-chips" id="day-tabs" style="margin-bottom: 3rem;">
+        <button class="chip-btn active" data-day="1">Día 1: Mié 12 Ago</button>
+        <button class="chip-btn" data-day="2">Día 2: Jue 13 Ago</button>
+        <button class="chip-btn" data-day="3">Día 3: Vie 14 Ago</button>
+        <button class="chip-btn" data-day="4">Día 4: Sáb 15 Ago</button>
+        <button class="chip-btn" data-day="5">Día 5: Dom 16 Ago</button>
+      </div>
+
+      <!-- Contenedor del Día Seleccionado -->
+      <div id="day-content-container">
+        <!-- Inyectado por JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Tips Generales del Guía -->
+  <section class="section" id="guide-tips-section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-badge">Consejos Clave</span>
+        <h2 class="section-title">Tips Generales del Guía</h2>
+        <p class="section-subtitle">Recomendaciones indispensables sobre dinero, hidratación y seguridad en Río.</p>
+      </div>
+
+      <div class="grid-3" id="guide-tips-grid">
+        <!-- Renderizado por JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Calculadora de Presupuesto -->
+  <section class="section" id="budget-calculator" style="background: rgba(0,0,0,0.15);">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-badge">Estimador de Gastos</span>
+        <h2 class="section-title">Calculadora del Viaje</h2>
+        <p class="section-subtitle">Calcula el presupuesto estimado por persona o para los 4 amigos durante los 5 días.
+        </p>
+      </div>
+
+      <div class="glass-card mixer-card" style="max-width: 800px; margin: 0 auto;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+          <div>
+            <label class="mixer-label">Número de Integrantes:</label>
+            <select id="calc-people" class="mixer-select">
+              <option value="1">1 Persona</option>
+              <option value="4" selected>Grupo de 4 Amigos</option>
+            </select>
+          </div>
+          <div>
+            <label class="mixer-label">Moneda de Muestra:</label>
+            <select id="calc-currency" class="mixer-select">
+              <option value="BRL" selected>Reales (R$)</option>
+              <option value="USD">Dólares (USD $)</option>
+            </select>
+          </div>
+        </div>
+
+        <div
+          style="padding: 1.5rem; background: rgba(6, 182, 212, 0.1); border: 1px dashed var(--accent-teal); border-radius: var(--radius-md); text-align: center;">
+          <h4 style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 0.5rem;">Estimado Total Sugerido de
+            Gastos Locales (Comida, Uber, Entradas, Cervezas):</h4>
+          <h2 id="calc-total-amount"
+            style="font-size: 2.75rem; font-weight: 800; color: var(--accent-gold); margin: 0.25rem 0;">R$ 4,800.00</h2>
+          <p id="calc-breakdown" style="font-size: 0.95rem; color: var(--text-muted);">Equivalente a <strong>R$ 1,200.00
+              por amigo</strong> para los 5 días en Río.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección del Mapa Interactivo -->
+  <section class="section" id="map-section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-badge">Geolocalización del Cronograma</span>
+        <h2 class="section-title">Mapa Interactivo del Itinerario</h2>
+        <p class="section-subtitle">Haz clic en los marcadores para ver la ubicación del depto, restaurantes, playas y
+          paradas del itinerario.</p>
+      </div>
+
+      <div id="map-container"></div>
+    </div>
+  </section>
+
+  <!-- Pie de Página -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">Río 2026 • 4 Amigos</div>
+      <ul class="footer-links">
+        <li><a href="#hero">Inicio</a></li>
+        <li><a href="#base-depto">Base Depto</a></li>
+        <li><a href="#itinerary-section">Itinerario</a></li>
+        <li><a href="#guide-tips-section">Tips Guía</a></li>
+        <li><a href="#map-section">Mapa</a></li>
+      </ul>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">Itinerario Enriquecido Río de Janeiro - 4 Amigos (Agosto
+        2026) © 2026</p>
+    </div>
+  </footer>
+
+  <!-- Script Leaflet CDN -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Scripts de la Aplicación -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
