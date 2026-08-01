@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!track || !prevBtn || !nextBtn) return;
 
     let currentIndex = 0;
-    const totalSlides = 2;
+    const totalSlides = track.children.length || 3;
 
     function goToSlide(index) {
       currentIndex = (index + totalSlides) % totalSlides;
