@@ -94,28 +94,13 @@ img {
   object-fit: cover;
 }
 
-/* Container */
+/* Container Mobile-First */
 .container {
-  width: 90%;
+  width: 100%;
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 1rem;
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--bg-secondary);
-  border-radius: var(--radius-full);
-  border: 2px solid var(--bg-primary);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-teal);
+  box-sizing: border-box;
 }
 
 /* Glassmorphism Card Style */
@@ -126,6 +111,9 @@ img {
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
   border-radius: var(--radius-md);
+  box-sizing: border-box;
+  overflow: hidden;
+  max-width: 100%;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
 }
 
