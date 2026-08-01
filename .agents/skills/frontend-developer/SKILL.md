@@ -1,33 +1,42 @@
 ---
 name: frontend-developer
-description: Agente de desarrollo Front End experto en arquitectura Web UI, HTML5 semántico, JavaScript ES6+ modular, integración de componentes interactivos y diseño adaptativo.
+description: Agente de desarrollo Front End experto en arquitectura Web UI Mobile-First, HTML5 semántico, JavaScript ES6+ modular, integración de componentes interactivos y diseño adaptativo.
 ---
 
-# Frontend Developer Skill - WebRioJaneiro
+# Frontend Developer Skill - WebRioJaneiro (Estrategia Mobile-First)
 
 Este Skill establece los estándares de arquitectura, guías de codificación y flujo de trabajo para el **Frontend Developer Agent** en la aplicación web **WebRioJaneiro**.
 
 ## Principios de Arquitectura Front End
-1. **Clean Code & Modularidad Vanilla ES6+**:
+
+1. **Estrategia Obligatoria Mobile-First**:
+   - Todo componente UI, barra de navegación, tarjeta o sección se maqueta e implementa primeramente para dispositivos móviles (Android / iOS con viewports de 360px a 430px).
+   - Adaptación progresiva mediante *Media Queries* para pantallas de escritorio (`@media (min-width: 851px)`).
+   - Uso de `min-width: 0`, `box-sizing: border-box` y `overflow-wrap: anywhere` en todos los contenedores flexibles para prevenir cualquier desbordamiento o truncamiento de texto.
+
+2. **Clean Code & Modularidad Vanilla ES6+**:
    - Separación estricta de responsabilidades entre vista (`index.html`), estilos (`css/styles.css`), datos de aplicación (`js/data.js`) y controlador interactivo (`js/app.js`).
    - Evitar contaminación del scope global encapsulando la lógica en controladores de módulo y delegación de eventos.
 
-2. **Diseño Visual de Alto Impacto (Glassmorphism UI)**:
+3. **Diseño Visual de Alto Impacto (Glassmorphism UI)**:
    - Implementar superficies traslúcidas con `backdrop-filter: blur()`, bordes sutiles con transparencia `rgba()` y sombras proyectadas suaves.
-   - Proveer conmutador dinámico entre Modo Oscuro (`data-theme="dark"`) y Modo Claro (`data-theme="light"`) con almacenamiento persistente en `localStorage`.
+   - Conmutador dinámico entre Modo Oscuro (`data-theme="dark"`) y Modo Claro (`data-theme="light"`) con almacenamiento persistente en `localStorage`.
 
-3. **Interacciones Fluidas & Micro-animaciones**:
-   - Efectos de respuesta táctil y visual al pasar el cursor (`:hover`, `:focus-visible`, `:active`).
-   - Transiciones aceleradas por hardware (`transform: translateY()`, `opacity`) para un rendimiento de 60 FPS en el renderizado del hilo principal.
+4. **Interacciones Fluidas & Micro-animaciones**:
+   - Efectos de respuesta táctil y visual al pasar el cursor o pulsar (`:hover`, `:active`, `:focus-visible`).
+   - Transiciones aceleradas por hardware (`transform`, `opacity`) a 60 FPS.
 
-4. **Persistencia y Datos Dinámicos**:
-   - Gestión de estado cliente con `localStorage` para guardar atracciones favoritas y preferencias de tema.
-   - Integración fluida con librerías externas (Leaflet.js para mapas) y APIs web nativas (`SpeechSynthesis` para voz en Portugués).
+5. **Persistencia y Datos Dinámicos**:
+   - Gestión de estado cliente con `localStorage`.
+   - Integración con Leaflet.js para mapas geolocalizados y SpeechSynthesis API para audio en portugués.
 
 ## Workflow de Desarrollo Front End
-1. **Estructura HTML5 Semántica**:
-   - Uso obligatorio de etiquetas `<nav>`, `<header>`, `<main>`, `<section>`, `<article>`, `<footer>` y encabezados ordenados jerárquicamente (`<h1>` único, `<h2>`, `<h3>`).
-2. **Definición del Sistema de Diseño (CSS Tokens)**:
-   - Mantener todas las variables en `:root` (`--bg-primary`, `--accent-teal`, `--font-main`, `--radius-md`).
-3. **Controlador y Delegación de Eventos (JS)**:
-   - Utilizar delegación de eventos (`document.addEventListener('click')`) para listas dinámicas (tarjetas, botones de modal, reproducción de voz).
+1. **Estructura HTML5 Semántica Mobile-First**:
+   - Uso obligatorio de etiquetas `<nav>`, `<header>`, `<main>`, `<section>`, `<article>`, `<footer>` con jerarquía de títulos válida.
+2. **Sistema de Diseño (CSS Tokens & Mobile Overrides)**:
+   - Mantener variables globales en `:root` y reglas móviles por defecto.
+3. **Auditoría de Desarrollo**:
+   - Ejecutar la verificación de código:
+     ```bash
+     python scripts/frontend_audit.py
+     ```
