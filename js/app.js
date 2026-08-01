@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const dayTabs = document.getElementById('day-tabs');
   const dayContentContainer = document.getElementById('day-content-container');
   const guideTipsGrid = document.getElementById('guide-tips-grid');
-  const themeToggleBtn = document.getElementById('theme-toggle-btn');
   const rioClockTime = document.getElementById('rio-clock-time');
 
   // Calculator Elements
@@ -25,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const calcTotalAmount = document.getElementById('calc-total-amount');
   const calcBreakdown = document.getElementById('calc-breakdown');
 
-  // Inicialización
-  initTheme();
+  // Inicialización (Modo Oscuro Permanente)
+  document.documentElement.setAttribute('data-theme', 'dark');
   initLiveClock();
   initMobileMenu();
   initCarousel();
@@ -36,28 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initCalculator();
   initLeafletMap();
   setupEventListeners();
-
-  /* ==========================================================
-     Tema Claro / Oscuro
-     ========================================================== */
-  function initTheme() {
-    document.documentElement.setAttribute('data-theme', state.theme);
-    updateThemeIcon();
-  }
-
-  function toggleTheme() {
-    state.theme = state.theme === 'dark' ? 'light' : 'dark';
-    localStorage.setItem('rio_theme', state.theme);
-    document.documentElement.setAttribute('data-theme', state.theme);
-    updateThemeIcon();
-  }
-
-  function updateThemeIcon() {
-    if (!themeToggleBtn) return;
-    themeToggleBtn.innerHTML = state.theme === 'dark'
-      ? '<i class="fa-solid fa-sun"></i>'
-      : '<i class="fa-solid fa-moon"></i>';
-  }
 
   /* ==========================================================
      Reloj de Río en Vivo
@@ -272,10 +249,6 @@ document.addEventListener('DOMContentLoaded', () => {
      Escuchadores de Eventos
      ========================================================== */
   function setupEventListeners() {
-    if (themeToggleBtn) {
-      themeToggleBtn.addEventListener('click', toggleTheme);
-    }
-
     if (dayTabs) {
       dayTabs.addEventListener('click', (e) => {
         const btn = e.target.closest('.chip-btn');
