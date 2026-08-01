@@ -1,41 +1,49 @@
 ---
 name: qa-engineer
-description: Agente especializado en Control de Calidad (QA Engineer) para auditar la web de Río de Janeiro, verificar enlaces, responsividad, accesibilidad WCAG, sintaxis HTML/CSS/JS y fidelidad del itinerario.
+description: Agente especializado en Control de Calidad (QA Engineer) para auditar la web de Río de Janeiro con máxima rigurosidad en estilos visuales, responsividad multiplataforma (Android, iOS, Windows, Mac), accesibilidad WCAG y fidelidad del itinerario.
 ---
 
-# QA Engineer Skill - WebRioJaneiro
+# QA Engineer Skill - WebRioJaneiro (Auditoría Rigurosa Multiplataforma)
 
-Este Skill define el rol, matriz de pruebas y herramientas de automatización del **QA Engineer** asignado a la web **WebRioJaneiro**.
+Este Skill define el rol, matriz de pruebas de alta rigurosidad y herramientas de automatización del **QA Engineer Agent** para la web **WebRioJaneiro**.
 
-## Responsabilidades del QA Engineer
-1. **Auditoría de Funcionalidad y UI**:
-   - Probar interactividad: selector de días de itinerario, filtro de categorías, taller de caipirinha, calculadora de presupuesto y mapa interactivo Leaflet.
-   - Probar reproductor de voz de síntesis de habla (SpeechSynthesis API) para la jerga carioca en portugués.
-   - Verificar la conmutación de temas (Modo Claro / Modo Oscuro) y persistencia en `localStorage`.
+## Directivas de Alta Rigurosidad en Verificación de Estilos
 
-2. **Auditoría de Responsividad y Cross-Browser**:
-   - Inspeccionar la navegación en pantallas móviles (320px - 480px), tablets (768px - 1024px) y escritorios (1200px+).
-   - Validar que no existan desbordamientos horizontales (`overflow-x`) ni solapamientos de texto.
+El **QA Engineer Agent** debe validar de manera estricta que la interfaz gráfica sea impecable en 4 entornos clave:
 
-3. **Auditoría de Contenido y Fidelidad al PDF**:
-   - Verificar que cada día del itinerario (Día 1 a Día 5) contenga exactamente las actividades, recomendaciones gastronómicas, lugares y horarios especificados en el documento "Itinerario Enriquecido: Río de Janeiro - 4 Amigos (Agosto 2026)".
-   - Validar que la base de operaciones sea **Rua Ministro Viveiros de Castro, 75 ap 901 - Copacabana, Posto 2**.
+1. **📱 Android (Samsung Galaxy / Chrome - Viewport 360px a 412px)**:
+   - **Barra de Navegación Flotante (`.navbar`)**: Debe mantenerse dentro de los límites del viewport (sin desbordamiento hacia la derecha). Los enlaces en `.nav-links` deben desplazarse horizontalmente de forma suave sin mostrar barras de desplazamiento antiestéticas.
+   - **Tarjetas Glassmorphism (`.glass-card`)**: Todo texto largo (direcciones, URLs) debe romperse adecuadamente (`overflow-wrap: anywhere; word-break: normal;`) sin salirse del borde del contenedor.
+   - **Carrusel e Imágenes**: `.carousel-wrapper` debe ser 100% elástico y no exceder los márgenes de la pantalla.
 
-4. **Ejecución de Pruebas Automatizadas**:
-   - Ejecutar el script automatizado de auditoría QA:
-     ```bash
-     python scripts/qa_audit.py
-     ```
-   - Revisar el informe generado en `tests/qa_report.md`.
+2. **📱 iOS (iPhone / Safari Mobile - Viewport 375px a 430px)**:
+   - Respetar áreas seguras (*Safe Area Insets*).
+   - Renderizado limpio de efectos de desfoque de cristal (`backdrop-filter: blur()`).
+   - Botones e íconos interactivos con un tamaño táctil mínimo de 44px x 44px (*Touch Targets*).
 
-## Matriz de Pruebas (Test Cases)
+3. **💻 Windows (Chrome, Edge, Firefox - Viewport 1280px a 1920px+)**:
+   - Maquetación fluida en grillas de 2, 3 y 4 columnas.
+   - Preservación de la regla de centrado flotante de la barra de navegación (`transform: translateX(-50%)`).
 
-| ID | Módulo | Descripción del Test | Criterio de Aceptación |
-|---|---|---|---|
-| TC-01 | Servidor | Servidor HTTP Activo | Respuesta HTTP 200 OK en `http://localhost:8000/` |
-| TC-02 | Recursos | Verificación de Imágenes | Existencia de las 8 imágenes en `assets/images/` |
-| TC-03 | HTML | Validez y Accesibilidad | Presencia de etiquetas alt, semantic HTML5 y sin IDs duplicados |
-| TC-04 | CSS | Sistema de Diseño | Variables CSS de colores, breakpoints responsivos y glassmorphism |
-| TC-05 | JS / Datos | Fidelidad del Itinerario | Presencia de las actividades clave de los 5 días en `TRIP_DATA` |
-| TC-06 | Mapa | Leaflet.js | Inicialización correcta del mapa con marcadores geolocalizados |
-| TC-07 | Presupuesto | Calculadora | Cálculo exacto de gastos para 1 o 4 personas en BRL y USD |
+4. **💻 Mac (Safari / Chrome Desktop)**:
+   - Renderizado nítido de fuentes web (Google Fonts Inter / Outfit).
+   - Transiciones de hover suaves (60 FPS) sin parpadeo (*flicker*) ni saltos de posición.
+
+---
+
+## Ejecución de Auditoría Automatizada Rigurosa
+
+El agente de QA ejecuta la suite de comprobación automatizada:
+
+```bash
+python scripts/qa_audit.py
+```
+
+El script evalúa:
+- **TC-01**: Integridad de Assets e Imágenes (15/15 archivos).
+- **TC-02**: Auditoría Semántica, Meta Viewport y Accesibilidad HTML5/ARIA.
+- **TC-03**: Auditoría de CSS Responsivo Multiplataforma (Breakpoints de Android/iOS 480px, Tablet 768px y Desktop 1024px, desbordamientos, touch targets).
+- **TC-04**: Fidelidad del Itinerario PDF (4 Amigos).
+- **TC-05**: Verificación de Servidor Web HTTP 200.
+
+El reporte consolidado de calidad se genera automáticamente en `tests/qa_report.md`.
