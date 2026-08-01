@@ -27,31 +27,20 @@
 
 <body>
 
-  <!-- Barra de Navegación Flotante (Mobile-First Layout Refactorizado) -->
+  <!-- Barra de Navegación Flotante (Dark Mode Permanente & Mobile-First) -->
   <nav class="navbar glass-card" id="navbar">
     <div class="navbar-container">
-      <!-- Extremo Izquierdo: Botón de Ajustes / Dark Mode -->
-      <div class="navbar-left">
-        <button id="theme-toggle-btn" class="theme-toggle-btn" title="Cambiar Tema Claro/Oscuro"
-          aria-label="Modo de Color">
-          <i class="fa-solid fa-moon"></i>
-        </button>
-      </div>
-
-      <!-- Grupo Central / Derecho: Título Principal + Menú Hamburguesa Inmediato -->
-      <div class="navbar-right-group">
-        <a href="#" class="logo">
-          <div class="logo-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
-          <span class="logo-text">Rio2026 • 4Amigos</span>
-        </a>
-        <button id="mobile-menu-toggle" class="mobile-menu-toggle" title="Abrir Menú de Navegación"
-          aria-label="Menú Móvil">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-      </div>
+      <a href="#" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
+        <span class="logo-text">Rio2026 • 4Amigos</span>
+      </a>
+      <button id="mobile-menu-toggle" class="mobile-menu-toggle" title="Abrir Menú de Navegación"
+        aria-label="Menú Móvil">
+        <i class="fa-solid fa-bars"></i>
+      </button>
     </div>
 
-    <!-- Menú Desplegable Hamburguesa -->
+    <!-- Menú Desplegable Flotante -->
     <ul class="nav-links" id="nav-links">
       <li><a href="#base-depto" class="nav-link"><i class="fa-solid fa-house-user"></i> Base Copacabana</a></li>
       <li><a href="#itinerary-section" class="nav-link"><i class="fa-solid fa-calendar-days"></i> Itinerario 5 Días</a></li>
