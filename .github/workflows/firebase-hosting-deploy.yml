@@ -18,4 +18,4 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_WEB_RIO_JANEIRO }}'
           channelId: live
-          projectId: web-rio-janeiro-2026
+          projectId: web-rio-janeiro
