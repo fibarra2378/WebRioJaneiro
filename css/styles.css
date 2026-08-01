@@ -922,3 +922,154 @@ img {
   margin-bottom: 2rem;
   color: var(--text-muted);
 }
+
+/* ==========================================================
+   Adaptaciones Responsivas Exclusivas para Mobile (Samsung S22 / Chrome)
+   ========================================================== */
+@media (max-width: 768px) {
+  /* Navbar Flotante ultra-compacta para móvil */
+  .navbar {
+    width: 95%;
+    max-width: 95%;
+    top: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 18px;
+  }
+
+  .logo {
+    gap: 0.35rem;
+  }
+
+  .logo-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .logo-text {
+    font-size: 0.95rem;
+    line-height: 1.1;
+  }
+
+  .nav-links {
+    gap: 0.3rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    max-width: 55%;
+    padding: 0.2rem 0;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-link {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 12px;
+  }
+
+  .theme-toggle-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 0.85rem;
+  }
+
+  /* Ajustes del Hero */
+  .hero {
+    padding-top: 6rem;
+    padding-bottom: 3rem;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+    line-height: 1.15;
+  }
+
+  .hero-desc {
+    font-size: 0.98rem;
+  }
+
+  .hero-widgets {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+
+  .widget-pill {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.85rem;
+  }
+
+  /* Ajuste de Secciones e Grillas */
+  .section {
+    padding: 3rem 0;
+  }
+
+  .glass-card {
+    padding: 1.25rem !important;
+    max-width: 100% !important;
+    overflow: hidden;
+  }
+
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  /* Carrusel Responsivo en Móvil */
+  .carousel-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 190px !important;
+    margin: 0 auto;
+  }
+
+  /* Ajustes de Mapa y Timeline */
+  #map-container {
+    height: 360px;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Samsung S22 & Pantallas Angostas (< 480px) */
+  body, p, a, h1, h2, h3, h4, h5, h6, span {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .navbar {
+    width: 96%;
+    padding: 0.45rem 0.65rem;
+  }
+
+  .logo-text {
+    font-size: 0.9rem;
+  }
+
+  .nav-links {
+    max-width: 50%;
+  }
+
+  .nav-link {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.4rem;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .carousel-wrapper {
+    height: 175px !important;
+  }
+}
