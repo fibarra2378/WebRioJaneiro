@@ -263,18 +263,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ==========================================================
-     Controlador del Carrusel Interactivo de Imágenes
+     Controlador del Carrusel Interactivo con Gestos Táctiles Móviles
      ========================================================== */
   function initCarousel() {
+    const wrapper = document.getElementById('base-carousel');
     const track = document.getElementById('carousel-track');
     const prevBtn = document.getElementById('carousel-prev-btn');
     const nextBtn = document.getElementById('carousel-next-btn');
     const dots = document.querySelectorAll('.carousel-dot');
 
-    if (!track || !prevBtn || !nextBtn) return;
+    if (!wrapper || !track || !prevBtn || !nextBtn) return;
 
     let currentIndex = 0;
-    const totalSlides = track.children.length || 3;
+    const totalSlides = track.children.length || 2;
+    let touchStartX = 0;
+    let touchEndX = 0;
 
     function goToSlide(index) {
       currentIndex = (index + totalSlides) % totalSlides;
@@ -284,13 +287,43 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
-    nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
-    dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => goToSlide(i));
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      goToSlide(currentIndex - 1);
     });
 
-    setInterval(() => goToSlide(currentIndex + 1), 5000);
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      goToSlide(currentIndex + 1);
+    });
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', (e) => {
+        e.preventDefault();
+        goToSlide(i);
+      });
+    });
+
+    // Soporte para gestos táctiles en pantallas móviles (Swipe)
+    wrapper.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    wrapper.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const swipeThreshold = 40;
+      if (touchStartX - touchEndX > swipeThreshold) {
+        goToSlide(currentIndex + 1);
+      } else if (touchEndX - touchStartX > swipeThreshold) {
+        goToSlide(currentIndex - 1);
+      }
+    }
+
+    setInterval(() => goToSlide(currentIndex + 1), 6000);
   }
 
   /* ==========================================================
