@@ -28,7 +28,9 @@ const TRIP_DATA = {
           name: "Estación Bike Itaú",
           address: "Praça do Lido (a 1 cuadra)",
           type: "Bicicletas Públicas",
-          desc: "Bicisenda costera directa para pedalear por Copacabana, Ipanema y Leblon."
+          price: "R$ 3.99 (1 Viaje) • R$ 13.90 (Pase Diario)",
+          url: "https://bikeitau.com.br/rio/",
+          desc: "Bicisenda costera directa para pedalear por Copacabana, Ipanema y Leblon. Descarga la App Bike Itaú para desbloquear."
         },
         {
           name: "Guarda de Equipaje (Bounce / LuggageHero)",
