@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!wrapper || !track || !prevBtn || !nextBtn) return;
 
     let currentIndex = 0;
-    const totalSlides = track.children.length || 3;
+    const totalSlides = track.children.length || 2;
     let touchStartX = 0;
     let touchEndX = 0;
 
