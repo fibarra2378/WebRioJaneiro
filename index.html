@@ -43,7 +43,8 @@
     <!-- Menú Desplegable Flotante -->
     <ul class="nav-links" id="nav-links">
       <li><a href="#base-depto" class="nav-link"><i class="fa-solid fa-house-user"></i> Base Copacabana</a></li>
-      <li><a href="#itinerary-section" class="nav-link"><i class="fa-solid fa-calendar-days"></i> Itinerario 5 Días</a></li>
+      <li><a href="#itinerary-section" class="nav-link"><i class="fa-solid fa-calendar-days"></i> Itinerario 5 Días</a>
+      </li>
       <li><a href="#guide-tips-section" class="nav-link"><i class="fa-solid fa-lightbulb"></i> Tips del Guía</a></li>
       <li><a href="#budget-calculator" class="nav-link"><i class="fa-solid fa-calculator"></i> Presupuesto</a></li>
       <li><a href="#map-section" class="nav-link"><i class="fa-solid fa-map-location-dot"></i> Mapa en Vivo</a></li>
@@ -102,35 +103,53 @@
       <div class="glass-card" style="padding: 2rem; margin-bottom: 2.5rem; border-left: 6px solid var(--accent-teal);">
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
           <div style="flex: 1; min-width: 280px;">
-            <h3 style="font-size: 1.6rem; font-weight: 800; color: var(--accent-teal);"><i class="fa-solid fa-location-dot"></i> Departamento en Copacabana</h3>
+            <h3 style="font-size: 1.6rem; font-weight: 800; color: var(--accent-teal);"><i
+                class="fa-solid fa-location-dot"></i> Departamento en Copacabana</h3>
             <p style="font-size: 1.1rem; color: var(--text-main); margin-top: 0.25rem;">
-              <a href="https://maps.app.goo.gl/DMGHfa5m6aJZGJHC6" target="_blank" rel="noopener noreferrer" style="color: var(--text-main); text-decoration: underline; font-weight: 700;" title="Abrir ubicación directa en Google Maps">
-                <i class="fa-solid fa-map-pin" style="color: var(--accent-gold); margin-right: 0.35rem;"></i>Rua Ministro Viveiros de Castro, 75 ap 901 — Copacabana, Posto 2 <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.85rem; color: var(--accent-teal); margin-left: 0.35rem;"></i>
+              <a href="https://maps.app.goo.gl/DMGHfa5m6aJZGJHC6" target="_blank" rel="noopener noreferrer"
+                style="color: var(--text-main); text-decoration: underline; font-weight: 700;"
+                title="Abrir ubicación directa en Google Maps">
+                <i class="fa-solid fa-map-pin" style="color: var(--accent-gold); margin-right: 0.35rem;"></i>Rua
+                Ministro Viveiros de Castro, 75 ap 901 — Copacabana, Posto 2 <i
+                  class="fa-solid fa-arrow-up-right-from-square"
+                  style="font-size: 0.85rem; color: var(--accent-teal); margin-left: 0.35rem;"></i>
               </a>
             </p>
-            <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 0.5rem;"><i class="fa-solid fa-person-walking-luggage"></i> A solo 4 minutos a pie (290 metros) de la playa y a 1 cuadra de Praça do Lido.</p>
+            <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 0.5rem;"><i
+                class="fa-solid fa-person-walking-luggage"></i> A solo 4 minutos a pie (290 metros) de la playa y a 1
+              cuadra de Praça do Lido.</p>
           </div>
           <!-- Carrusel Interactivo de Imágenes (Mapa de Ruta y Foto Posto 2) -->
           <div class="carousel-wrapper" id="base-carousel">
             <div class="carousel-track" id="carousel-track">
+
               <!-- Slide 1: Mapa de Ruta a Pie (Google Maps 290m) -->
               <div class="carousel-slide">
-                <img src="assets/images/route_map_posto2.jpg" alt="Mapa de Ruta a Pie - Depto a Posto 2 (4 min)">
+                <img src="assets/images/route_map_posto2.jpg" alt="Mapa de Ruta a Pie - Depto a Posto 2 (4 min)"
+                  loading="eager">
                 <span class="carousel-badge"><i class="fa-solid fa-walking"></i> Ruta: 4 min (290m)</span>
               </div>
+
               <!-- Slide 2: Playa de Copacabana Posto 2 -->
               <div class="carousel-slide">
-                <img src="assets/images/copacabana_posto2.png" alt="Playa de Copacabana - Posto 2">
+                <img src="assets/images/copacabana_posto2.png" alt="Playa de Copacabana - Posto 2" loading="lazy">
                 <span class="carousel-badge"><i class="fa-solid fa-umbrella-beach"></i> Copacabana Posto 2</span>
               </div>
+
             </div>
+
             <!-- Botones de Navegación del Carrusel -->
-            <button class="carousel-nav-btn carousel-nav-prev" id="carousel-prev-btn" aria-label="Imagen anterior"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="carousel-nav-btn carousel-nav-next" id="carousel-next-btn" aria-label="Siguiente imagen"><i class="fa-solid fa-chevron-right"></i></button>
+            <button class="carousel-nav-btn carousel-nav-prev" id="carousel-prev-btn" aria-label="Imagen anterior">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="carousel-nav-btn carousel-nav-next" id="carousel-next-btn" aria-label="Siguiente imagen">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
             <!-- Indicadores -->
-            <div class="carousel-dots" id="carousel-dots">
-              <span class="carousel-dot active" data-index="0"></span>
-              <span class="carousel-dot" data-index="1"></span>
+            <div class="carousel-dots" id="carousel-dots" aria-label="Navegación de diapositivas">
+              <button class="carousel-dot active" data-index="0" aria-label="Ir a diapositiva 1"></button>
+              <button class="carousel-dot" data-index="1" aria-label="Ir a diapositiva 2"></button>
             </div>
           </div>
         </div>
