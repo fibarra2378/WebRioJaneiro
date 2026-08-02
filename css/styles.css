@@ -1294,13 +1294,53 @@ img {
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
+/* Luggage Storage Horizontal Scroll Carousel Container */
+.luggage-scroll-container {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.5rem 0.25rem 1.25rem 0.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-teal) transparent;
+}
+
+.luggage-scroll-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.luggage-scroll-container::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.4);
+  border-radius: var(--radius-full);
+}
+
+.luggage-scroll-container::-webkit-scrollbar-thumb {
+  background: var(--accent-teal);
+  border-radius: var(--radius-full);
+}
+
 /* Luggage Storage Section Component Styles */
 .luggage-card {
+  flex: 0 0 85%;
+  max-width: 340px;
+  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
   transition: transform var(--transition-fast), border-color var(--transition-fast);
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .luggage-card {
+    flex: 0 0 320px;
+  }
 }
 
 .luggage-card:hover {
