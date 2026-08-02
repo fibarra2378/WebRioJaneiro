@@ -340,10 +340,14 @@ img {
   padding: 0.6rem 1.25rem;
 }
 
+.navbar.glass-card:hover {
+  transform: translateX(-50%);
+}
+
 .navbar-container {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .mobile-menu-toggle {
