@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
   <!-- Estilos de la Aplicación -->
-  <link rel="stylesheet" href="css/styles.css?v=5.0">
+  <link rel="stylesheet" href="css/styles.css?v=6.0">
 </head>
 
 <body>
@@ -95,6 +95,45 @@
     </div>
   </section>
 
+  <!-- Sección Galería de la Hermandad (Fotos Reales de Los 4 Amigos) -->
+  <section class="section" id="friends-gallery" style="padding-top: 2rem; padding-bottom: 2rem;">
+    <div class="container">
+      <div class="glass-card" style="padding: 1.75rem; border-top: 4px solid var(--accent-gold);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+          <div>
+            <span class="section-badge"><i class="fa-solid fa-users"></i> La Banda en Río 2026</span>
+            <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--text-main); margin-top: 0.25rem;">Los 4 Amigos • Galería & Recuerdos</h3>
+          </div>
+          <span style="font-size: 0.85rem; color: var(--accent-gold); font-weight: 700;"><i class="fa-solid fa-camera"></i> Historias de Viajes</span>
+        </div>
+
+        <div class="friends-gallery-grid">
+          <!-- Tarjeta Polaroid Principal (Collage de Recuerdos) -->
+          <div class="friends-polaroid-card">
+            <img src="assets/images/friends_collage.jpg" alt="Mural Polaroid de Recuerdos - Los 4 Amigos" loading="eager">
+            <div class="friends-polaroid-caption"><i class="fa-solid fa-heart" style="color: var(--accent-crimson);"></i> Años de Viajes & Camaradería</div>
+          </div>
+
+          <!-- Tarjetas de Momentos Destacados -->
+          <div class="friends-photos-subgrid">
+            <div class="friends-photo-card">
+              <img src="assets/images/friends_toast.jpg" alt="El Brindis de los 4 Amigos" loading="lazy">
+              <div class="friends-photo-badge"><i class="fa-solid fa-glass-cheers"></i> El Brindis Oficial</div>
+            </div>
+            <div class="friends-photo-card">
+              <img src="assets/images/friends_seafood.png" alt="Disfrutando el Banquete" loading="lazy">
+              <div class="friends-photo-badge"><i class="fa-solid fa-utensils"></i> Banquete 5 Días</div>
+            </div>
+            <div class="friends-photo-card">
+              <img src="assets/images/friends_mate.png" alt="Ruta & Mate Rioplatense" loading="lazy">
+              <div class="friends-photo-badge"><i class="fa-solid fa-mug-hot"></i> Modo Ruta & Mate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Sección de Base de Operaciones y Logística -->
   <section class="section" id="base-depto">
     <div class="container">
@@ -140,6 +179,12 @@
                 <span class="carousel-badge"><i class="fa-solid fa-umbrella-beach"></i> Copacabana Posto 2</span>
               </div>
 
+              <!-- Slide 3: Los 4 Amigos en Ruta -->
+              <div class="carousel-slide">
+                <img src="assets/images/friends_bus.png" alt="Los 4 Amigos en Ruta a Copacabana" loading="lazy">
+                <span class="carousel-badge"><i class="fa-solid fa-users"></i> Los 4 Amigos en Ruta</span>
+              </div>
+
             </div>
 
             <!-- Botones de Navegación del Carrusel -->
@@ -154,6 +199,7 @@
             <div class="carousel-dots" id="carousel-dots" aria-label="Navegación de diapositivas">
               <button class="carousel-dot active" data-index="0" aria-label="Ir a diapositiva 1"></button>
               <button class="carousel-dot" data-index="1" aria-label="Ir a diapositiva 2"></button>
+              <button class="carousel-dot" data-index="2" aria-label="Ir a diapositiva 3"></button>
             </div>
           </div>
         </div>
@@ -204,7 +250,7 @@
       <div class="glass-card guide-welcome-card" style="margin-bottom: 2rem; padding: 1.75rem; border-left: 6px solid var(--accent-teal);">
         <div style="display: flex; gap: 1.25rem; align-items: flex-start; flex-wrap: wrap;">
           <div class="guide-avatar-wrap">
-            <i class="fa-solid fa-user-tie" style="font-size: 2rem; color: var(--accent-teal);"></i>
+            <img src="assets/images/friends_toast.jpg" alt="Los 4 Amigos Brindando" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
           </div>
           <div style="flex: 1; min-width: 260px;">
             <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
@@ -419,8 +465,8 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <!-- Scripts de la Aplicación -->
-  <script src="js/data.js?v=5.0"></script>
-  <script src="js/app.js?v=5.0"></script>
+  <script src="js/data.js?v=6.0"></script>
+  <script src="js/app.js?v=6.0"></script>
 </body>
 
 </html>
