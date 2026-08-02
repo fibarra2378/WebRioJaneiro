@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.documentElement.setAttribute('data-theme', 'dark');
   initLiveClock();
   initOpenMeteoWeather();
+  initPackingChecklist();
   initMobileMenu();
   initCarousel();
   renderBaseServices();
@@ -455,5 +456,58 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
       }
     }
+  }
+
+  /* ==========================================================
+     Controlador del Checklist Interactivo de Mochila (LocalStorage)
+     ========================================================== */
+  function initPackingChecklist() {
+    const checkboxes = document.querySelectorAll('.pack-checkbox');
+    const progressBar = document.getElementById('packing-progress-bar');
+    const progressText = document.getElementById('packing-progress-text');
+    if (!checkboxes.length || !progressBar || !progressText) return;
+
+    const STORAGE_KEY = 'rio_packing_checklist_v1';
+    let savedState = {};
+
+    try {
+      savedState = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    } catch (e) {
+      savedState = {};
+    }
+
+    function updateProgress() {
+      const total = checkboxes.length;
+      let checkedCount = 0;
+
+      checkboxes.forEach(cb => {
+        const id = cb.getAttribute('data-id');
+        if (savedState[id]) {
+          cb.checked = true;
+          checkedCount++;
+        } else {
+          cb.checked = false;
+        }
+      });
+
+      const percentage = Math.round((checkedCount / total) * 100);
+      progressBar.style.width = `${percentage}%`;
+      progressText.textContent = `${percentage}% (${checkedCount}/${total})`;
+    }
+
+    checkboxes.forEach(cb => {
+      cb.addEventListener('change', (e) => {
+        const id = e.target.getAttribute('data-id');
+        savedState[id] = e.target.checked;
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(savedState));
+        } catch (err) {
+          console.warn('LocalStorage no disponible:', err);
+        }
+        updateProgress();
+      });
+    });
+
+    updateProgress();
   }
 });

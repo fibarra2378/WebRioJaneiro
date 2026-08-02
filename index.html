@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
   <!-- Estilos de la Aplicación -->
-  <link rel="stylesheet" href="css/styles.css?v=4.0">
+  <link rel="stylesheet" href="css/styles.css?v=5.0">
 </head>
 
 <body>
@@ -85,6 +85,10 @@
           <a href="#map-section" class="chip-btn active"
             style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;">
             <i class="fa-solid fa-map-location-dot"></i> Ver Mapa de Rutas
+          </a>
+          <a href="#packing-checklist" class="chip-btn"
+            style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+            <i class="fa-solid fa-suitcase-rolling" style="color: var(--accent-gold);"></i> Checklist Mochila
           </a>
         </div>
       </div>
@@ -194,6 +198,103 @@
         <span class="section-badge">Consejos Clave</span>
         <h2 class="section-title">Tips Generales del Guía</h2>
         <p class="section-subtitle">Recomendaciones indispensables sobre dinero, hidratación y seguridad en Río.</p>
+      </div>
+
+      <!-- Mensaje de Bienvenida del Guía Especializado -->
+      <div class="glass-card guide-welcome-card" style="margin-bottom: 2rem; padding: 1.75rem; border-left: 6px solid var(--accent-teal);">
+        <div style="display: flex; gap: 1.25rem; align-items: flex-start; flex-wrap: wrap;">
+          <div class="guide-avatar-wrap">
+            <i class="fa-solid fa-user-tie" style="font-size: 2rem; color: var(--accent-teal);"></i>
+          </div>
+          <div style="flex: 1; min-width: 260px;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
+              <span class="section-badge" style="margin-bottom: 0;"><i class="fa-solid fa-award"></i> Guía de Turismo Especializado</span>
+              <span style="font-size: 0.85rem; color: var(--accent-gold); font-weight: 700;">Cidade Maravilhosa</span>
+            </div>
+            <h3 style="font-size: 1.35rem; color: var(--text-main); font-weight: 800; margin-bottom: 0.5rem;">¡Hola! Qué alegría saludarte.</h3>
+            <p style="font-size: 0.98rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.85rem;">
+              Estoy aquí para asegurarme de que tu viaje a Río de Janeiro sea una experiencia absolutamente inolvidable. Viajar solo con mochila de mano por 5 días es una decisión brillante: te dará muchísima agilidad en el aeropuerto y libertad al moverte.
+            </p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.88rem; background: rgba(15, 23, 42, 0.6); padding: 0.75rem 1rem; border-radius: var(--radius-md); border: 1px solid rgba(255, 255, 255, 0.1);">
+              <div><i class="fa-solid fa-sun" style="color: var(--accent-gold);"></i> <strong>Clima en Agosto:</strong> 25°C a 27°C (Invierno tropical seco)</div>
+              <div><i class="fa-solid fa-moon" style="color: var(--accent-teal);"></i> <strong>Noches:</strong> 18°C a 20°C (Buzo o campera liviana)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Widget Interactivo: Checklist de Equipaje de Mano (Mochila 5 Días) -->
+      <div class="glass-card" id="packing-checklist" style="margin-bottom: 3rem; padding: 1.75rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+          <div>
+            <span class="section-badge"><i class="fa-solid fa-list-check"></i> Equipaje Optimizado</span>
+            <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--text-main); margin-top: 0.25rem;">Checklist de Mochila (5 Días)</h3>
+          </div>
+          <!-- Barra de Progreso -->
+          <div style="min-width: 220px;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.35rem;">
+              <span style="color: var(--text-muted);">Progreso de Mochila:</span>
+              <span id="packing-progress-text" style="color: var(--accent-teal);">0%</span>
+            </div>
+            <div style="width: 100%; height: 10px; background: rgba(255, 255, 255, 0.1); border-radius: var(--radius-full); overflow: hidden;">
+              <div id="packing-progress-bar" style="width: 0%; height: 100%; background: var(--gradient-rio); transition: width 0.35s ease;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categorías de Equipaje Grid Mobile-First -->
+        <div class="packing-categories-grid">
+          <!-- Categoría 1: Lo puesto en vuelo -->
+          <div class="packing-category-card">
+            <h4 class="packing-category-title"><i class="fa-solid fa-plane-departure" style="color: var(--accent-gold);"></i> ✈️ En el Vuelo (Puesto)</h4>
+            <p class="packing-category-subtitle">Ahorra espacio valioso en la mochila:</p>
+            <ul class="checklist-items-list">
+              <li><label class="check-item"><input type="checkbox" class="pack-checkbox" data-id="p1"> <span>Pantalón largo cómodo (jean o jogger)</span></label></li>
+              <li><label class="check-item"><input type="checkbox" class="pack-checkbox" data-id="p2"> <span>Zapatillas deportivas (caminata/trekking)</span></label></li>
+              <li><label class="check-item"><input type="checkbox" class="pack-checkbox" data-id="p3"> <span>Remera de algodón</span></label></li>
+              <li><label class="check-item"><input type="checkbox" class="pack-checkbox" data-id="p4"> <span>Buzo, campera liviana o rompevientos</span></label></li>
+            </ul>
+          </div>
+
+          <!-- Categoría 2: Ropa en Mochila -->
+          <div class="packing-category-card">
+            <h4 class="packing-category-title"><i class="fa-solid fa-shirt" style="color: var(--accent-teal);"></i> 🎒 En la Mochila (Ropa)</h4>
+            <p class="packing-category-subtitle">Técnica ninja: Enrolla en tubos ("roll method"):</p>
+            <ul class="checklist-items-list">
+              <li><label class="check-item"><input type="checkbox" class="pack-checkbox" data-id="p5"> <span>4 remeras (algodón + dry-fit deportivas)</span></label></li>
+              <li><label class="check-item"><input type="checkbox" class="pack-checkbox" data-id="p6"> <span>2 pantalones cortos / bermudas</span></label></li>
+              <li><label class="check-item"><input type="checkbox" class="pack-checkbox" data-id="p7"> <span>1 o 2 trajes de baño (sunga / short de baño)</span></label></li>
+              <li><label class="check-item"><input type="checkbox" class="pack-checkbox" data-id="p8"> <span>5 ropa interior + 3-4 pares de medias</span></label></li>
+              <li><label class="check-item"><input type="checkbox" class="pack-checkbox" data-id="p9"> <span>Ojotas / Chanclas (o Havaianas allá)</span></label></li>
+            </ul>
+          </div>
+
+          <!-- Categoría 3: Higiene y Líquidos -->
+          <div class="packing-category-card">
+            <h4 class="packing-category-title"><i class="fa-solid fa-pump-soap" style="color: var(--accent-teal);"></i> 🪥 Higiene (Regla < 100ml)</h4>
+            <p class="packing-category-subtitle">Bolsa Ziploc transparente obligatoria:</p>
+            <ul class="checklist-items-list">
+              <li><label class="check-item"><input type="checkbox" class="pack-checkbox" data-id="p10"> <span>Cepillo + pasta dental (tamaño viaje)</span></label></li>
+              <li><label class="check-item"><input type="checkbox" class="pack-checkbox" data-id="p11"> <span>Desodorante stick/roll-on (no aerosol)</span></label></li>
+              <li><label class="check-item"><input type="checkbox" class="pack-checkbox" data-id="p12"> <span>Protector solar facial pequeño</span></label></li>
+              <li><label class="check-item"><input type="checkbox" class="pack-checkbox" data-id="p13"> <span>Máquina de afeitar</span></label></li>
+              <li><label class="check-item"><input type="checkbox" class="pack-checkbox" data-id="p14"> <span>Champú/Jabón en pastilla sólida</span></label></li>
+            </ul>
+          </div>
+
+          <!-- Categoría 4: Tecnología y Docs -->
+          <div class="packing-category-card">
+            <h4 class="packing-category-title"><i class="fa-solid fa-mobile-screen-button" style="color: var(--accent-gold);"></i> 📱 Tecnología y Docs</h4>
+            <p class="packing-category-subtitle">Indispensables para el día a día:</p>
+            <ul class="checklist-items-list">
+              <li><label class="check-item"><input type="checkbox" class="pack-checkbox" data-id="p15"> <span>DNI físico en buen estado (o Pasaporte)</span></label></li>
+              <li><label class="check-item"><input type="checkbox" class="pack-checkbox" data-id="p16"> <span>Cargador celular (patas tipo N / C redondas)</span></label></li>
+              <li><label class="check-item"><input type="checkbox" class="pack-checkbox" data-id="p17"> <span>Batería externa (Power bank)</span></label></li>
+              <li><label class="check-item"><input type="checkbox" class="pack-checkbox" data-id="p18"> <span>Anteojos de sol + Gorra</span></label></li>
+              <li><label class="check-item"><input type="checkbox" class="pack-checkbox" data-id="p19"> <span>Riñonera pequeña / cinturón de seguridad</span></label></li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <div class="grid-3" id="guide-tips-grid">
@@ -318,8 +419,8 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <!-- Scripts de la Aplicación -->
-  <script src="js/data.js?v=4.0"></script>
-  <script src="js/app.js?v=4.0"></script>
+  <script src="js/data.js?v=5.0"></script>
+  <script src="js/app.js?v=5.0"></script>
 </body>
 
 </html>
