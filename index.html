@@ -22,18 +22,14 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
   <!-- Estilos de la Aplicación -->
-  <link rel="stylesheet" href="css/styles.css?v=11.0">
+  <link rel="stylesheet" href="css/styles.css?v=13.0">
 </head>
 
 <body>
 
   <!-- Barra de Navegación Flotante (Dark Mode Permanente & Mobile-First) -->
   <nav class="navbar glass-card" id="navbar">
-    <div class="navbar-container">
-      <a href="#" class="logo">
-        <div class="logo-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
-        <span class="logo-text">Rio2026 • 4Amigos</span>
-      </a>
+    <div class="navbar-container" style="justify-content: flex-end;">
       <button id="mobile-menu-toggle" class="mobile-menu-toggle" title="Abrir Menú de Navegación"
         aria-label="Menú Móvil">
         <i class="fa-solid fa-bars"></i>
@@ -47,6 +43,7 @@
       <li><a href="#guide-tips-section" class="nav-link"><i class="fa-solid fa-lightbulb"></i> Tips del Guía</a></li>
       <li><a href="#budget-calculator" class="nav-link"><i class="fa-solid fa-calculator"></i> Presupuesto</a></li>
       <li><a href="#luggage-storage" class="nav-link"><i class="fa-solid fa-suitcase"></i> Guarda de Equipaje</a></li>
+      <li><a href="#tours-excursions" class="nav-link"><i class="fa-solid fa-compass"></i> Excursiones</a></li>
       <li><a href="#map-section" class="nav-link"><i class="fa-solid fa-map-location-dot"></i> Mapa en Vivo</a></li>
     </ul>
   </nav>
@@ -506,6 +503,24 @@
     </div>
   </section>
 
+  <!-- Sección de Atracciones & Excursiones Destacadas -->
+  <section class="section" id="tours-excursions">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-badge"><i class="fa-solid fa-compass"></i> Experiencias Imperdibles</span>
+        <h2 class="section-title">🌟 Excursiones & Atracciones en Río</h2>
+        <p class="section-subtitle">Puntos turísticos emblemáticos, tours guiados y actividades destacadas para disfrutar en grupo durante agosto.</p>
+      </div>
+
+      <div class="tours-scroll-container" id="tours-scroll-container">
+        <!-- Renderizado dinámico desde JS con endpoint proxy getTopRioTours -->
+        <div class="tour-skeleton-card"></div>
+        <div class="tour-skeleton-card"></div>
+        <div class="tour-skeleton-card"></div>
+      </div>
+    </div>
+  </section>
+
     <!-- Sección del Mapa Interactivo -->
     <section class="section" id="map-section">
       <div class="container">
@@ -540,8 +555,8 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <!-- Scripts de la Aplicación -->
-  <script src="js/data.js?v=11.0"></script>
-  <script src="js/app.js?v=11.0"></script>
+  <script src="js/data.js?v=13.0"></script>
+  <script src="js/app.js?v=13.0"></script>
 </body>
 
 </html>

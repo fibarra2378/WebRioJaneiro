@@ -518,4 +518,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateProgress();
   }
+
+  /* ==========================================================
+     Controlador de Atracciones & Excursiones (Proxy getTopRioTours)
+     ========================================================== */
+  async function initToursSection() {
+    const toursContainer = document.getElementById('tours-scroll-container');
+    if (!toursContainer) return;
+
+    let tours = (typeof TRIP_DATA !== 'undefined' && TRIP_DATA.topRioTours) ? TRIP_DATA.topRioTours : [];
+
+    try {
+      const response = await fetch('/api/getTopRioTours');
+      if (response.ok) {
+        const result = await response.json();
+        if (result && result.data && result.data.length > 0) {
+          tours = result.data;
+        }
+      }
+    } catch (e) {
+      console.info('Utilizando dataset curado de excursiones:', e);
+    }
+
+    renderToursCards(toursContainer, tours);
+  }
+
+  function renderToursCards(container, tours) {
+    if (!tours || !tours.length) {
+      container.innerHTML = `<p style="color: var(--text-muted); text-align: center; width: 100%;">No hay excursiones disponibles en este momento.</p>`;
+      return;
+    }
+
+    container.innerHTML = tours.map(tour => `
+      <div class="glass-card tour-card">
+        <div class="tour-card-header">
+          <img src="${tour.image}" alt="${tour.title}" loading="lazy">
+          <span class="tour-category-tag"><i class="fa-solid fa-tag"></i> ${tour.category}</span>
+          ${tour.badge ? `<span class="tour-badge-tag"><i class="fa-solid fa-star"></i> ${tour.badge}</span>` : ''}
+        </div>
+        <div class="tour-card-body">
+          <div>
+            <h3 class="tour-title">${tour.title}</h3>
+            <div class="tour-meta">
+              <span class="tour-rating"><i class="fa-solid fa-star"></i> ${tour.rating} (${tour.reviewsCount.toLocaleString()})</span>
+              <span class="tour-duration"><i class="fa-solid fa-clock"></i> ${tour.duration}</span>
+            </div>
+            <div class="tour-price-wrap">
+              <span class="tour-price-val">${tour.priceBRL === 0 ? 'Gratis' : `R$ ${tour.priceBRL}`}</span>
+              ${tour.priceUSD > 0 ? `<span class="tour-price-usd">(~$${tour.priceUSD} USD / pers)</span>` : ''}
+            </div>
+            <p class="tour-desc">${tour.description}</p>
+          </div>
+          <div class="tour-card-footer">
+            <a href="${tour.bookingUrl}" target="_blank" rel="noopener noreferrer" class="search-btn tour-cta-btn" aria-label="Reservar excursión ${tour.title}">
+              <span>Reservar Excursión</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  initToursSection();
 });

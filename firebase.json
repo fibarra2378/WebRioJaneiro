@@ -11,6 +11,12 @@
       "Dockerfile",
       "docker-compose.yml"
     ],
+    "rewrites": [
+      {
+        "source": "/api/getTopRioTours",
+        "function": "getTopRioTours"
+      }
+    ],
     "headers": [
       {
         "source": "**/*.@(html|css|js)",
