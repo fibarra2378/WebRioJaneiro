@@ -1,90 +1,70 @@
-# Guía de Agentes y Flujo de Trabajo (WebRioJaneiro)
+# Guía de Agentes y Protocolo de Orquestación Estricto (WebRioJaneiro)
 
-Este proyecto cuenta con un equipo de **5 agentes especializados** (**UI/UX Designer**, **Frontend Developer**, **Backend Developer**, **QA Engineer** y **DevOps Engineer**) que colaboran mediante un **Flujo de Trabajo Estándar Integrado de 5 Fases (UI/UX -> Frontend -> Backend -> QA -> DevOps -> Deploy)** bajo una **Estrategia Obligatoria Mobile-First**.
-
----
-
-## 📱 Regla Maestra: Estrategia de Diseño Mobile-First & Glassmorphism
-
-**Absolutamente todo lo desarrollado debe ser diseñado e implementado bajo el criterio Mobile-First**:
-1. **Prioridad Móvil Ergónomica**: La maquetación base en CSS/HTML se estructura primeramente para dispositivos móviles (Android / iOS con viewports de 360px a 430px) priorizando la zona táctil del pulgar (*thumb zone*).
-2. **Mejora Progresiva**: Las pantallas más grandes (tablets y escritorios Windows/Mac) se adaptan mediante *Media Queries* progresivas (`@media (min-width: ...)`).
-3. **Cero Truncamiento & Flexbox Robusto**: Los componentes UI (como la barra flotante, tarjetas y carruseles) deben contar con `min-width: 0`, `overflow-wrap: anywhere` y controles táctiles (*touch targets* mínimo 44px x 44px).
+Este documento establece el **Manifiesto de Orquestación Estricto** para el escuadrón de **5 agentes especializados** (**UI/UX Designer**, **Backend Developer**, **Frontend Developer**, **QA Engineer** y **DevOps Engineer**).
 
 ---
 
-## 🔄 Flujo de Trabajo Estándar Integrado (6 Fases)
+## ⚖️ Principios Arquitectónicos Maestros
+
+1. **Fuente Única de Verdad**:
+   - Ante cualquier discrepancia técnica, las reglas globales definidas en el archivo `gemini.md` tienen **prioridad absoluta** sobre los criterios individuales de los agentes.
+
+2. **Límites de Dominio (Separation of Concerns)**:
+   - Ningún agente tiene permitido sobreescribir la capa arquitectónica de otro.
+   - Si el Frontend Developer Agent detecta un problema en un endpoint, contrato o esquema de datos, debe delegar la corrección al Backend Developer Agent, en lugar de parcharlo en la vista.
+
+3. **Estrategia Obligatoria Mobile-First**:
+   - Todo componente UI se maqueta primeramente para dispositivos móviles (Android / iOS de 360px a 430px) priorizando la zona táctil del pulgar (*thumb zone*).
+   - Adaptación progresiva mediante *Media Queries* (`@media (min-width: 851px)`).
+   - Flexbox robusto con `min-width: 0`, `overflow-wrap: anywhere` y objetivos táctiles mínimos de 44px x 44px.
+
+---
+
+## 🔄 Ciclo de Vida de Desarrollo (Pipeline Secuencial de 4 Fases con Compuertas)
 
 ```mermaid
 graph TD
-    A[1. Solicitud de Cambio / Requerimiento] --> B[2. UI/UX Designer Agent: Auditoría de Diseño & Especificaciones]
-    B --> C[3. Frontend Developer Agent: Desarrollo & Audit Frontend]
-    C --> D[4. Backend Developer Agent: APIs, Seguridad & Datos]
-    D --> E[5. QA Engineer Agent: Suite de Pruebas Multiplataforma]
-    E --> F{¿Defectos Detectados?}
-    F -- Sí --> G[Registro de Defectos & Corrección]
-    G --> E
-    F -- No --> H[6. DevOps Engineer Agent: Pipeline CI/CD, Docker & Git]
-    H --> I[7. Despliegue Exitoso a Producción / Firebase / Pages]
+    A[Solicitud de Cambio / CR] --> B1[Fase 1A: UI/UX Designer Agent]
+    A --> B2[Fase 1B: Backend Developer Agent]
+    B1 -->|ux_audit.py| C{Compuerta 1: ¿Diseño & Backend Aprobados?}
+    B2 -->|backend_audit.py| C
+    C -- Sí --> D[Fase 2: Frontend Developer Agent - Ensamblaje Mobile-First]
+    C -- No --> B1
+    D -->|frontend_audit.py| E{Compuerta 2: ¿Frontend 100% PASS?}
+    E -- No --> D
+    E -- Sí --> F[Fase 3: QA Engineer Agent - Auditoría Destructiva]
+    F -->|qa_audit.py| G{Compuerta 3: ¿QA 100% PASS?}
+    G -- No (Retroceso Automático a Fase 2) --> D
+    G -- Sí --> H[Fase 4: DevOps Engineer Agent - CI/CD, Docker & Git dev/main]
+    H -->|devops_audit.py| I[Despliegue Exitoso a Firebase Hosting]
 ```
 
-### Fase 1: Solicitud de Cambio (CR)
-- Se define el requerimiento bajo alcance **Mobile-First**.
+### 🎨 Fase 1: Contratos y Diseño (Paralelo: UI/UX & Backend)
+- **UI/UX Designer Agent**: Define la ergonomía táctil, sistema de diseño Glassmorphism, paleta de colores y jerarquía tipográfica.
+- **Backend Developer Agent**: Estructura los contratos de API, integraciones externas (Open-Meteo, Firebase, Leaflet), esquemas en `data.js` y seguridad OWASP.
+- **Compuerta 1**: Ambos scripts (`scripts/ux_audit.py` y `scripts/backend_audit.py`) deben ser ejecutados y retornar **100% PASS** antes de liberar su trabajo a la Fase 2.
 
-### Fase 2: Diseño & Experiencia de Usuario (UI/UX Designer Agent)
-- Audita el sistema de diseño visual, jerarquía tipográfica, paleta Glassmorphism y ergonomía táctil.
-- Ejecución de auditoría de diseño: `python scripts/ux_audit.py`
-- Emite las especificaciones de diseño y propuestas de mejora para el desarrollador.
+### 💻 Fase 2: Ensamblaje (Frontend Developer Agent)
+- **Frontend Developer Agent**: Toma los recursos y contratos aprobados de la Fase 1. Se encarga exclusivamente de la maquetación Mobile-First HTML5/CSS3 y la interactividad JS en la vista, sin alterar la lógica server-side.
+- **Compuerta 2**: Debe ejecutar y asegurar que `scripts/frontend_audit.py` retorne cero errores (100% PASS).
 
-### Fase 3: Desarrollo Front End (Frontend Developer Agent)
-- Implementa el código en HTML5 semántico, CSS3 Mobile-First, JS ES6+ modular o datos.
-- Ejecución de auditoría de desarrollo: `python scripts/frontend_audit.py`
+### 🛡️ Fase 3: Verificación (QA Engineer Agent)
+- **QA Engineer Agent**: Recibe el build. Ejecuta pruebas destructivas y analíticas de responsividad multiplataforma (Android, iOS, Windows, Mac), accesibilidad táctil WCAG y precisión del itinerario.
+- **Compuerta 3**: Valida con `scripts/qa_audit.py`. Si la suite detecta algún defecto, **el ticket retrocede a la Fase 2 automáticamente** registrando las fallas en `tests/defects_report.md`.
 
-### Fase 4: Desarrollo Backend & Integraciones (Backend Developer Agent)
-- Valida las integraciones con APIs externas (Open-Meteo, Leaflet, Firebase).
-- Audita la seguridad de enlaces externos, configuración de Firebase y esquemas de datos.
-- Ejecución de auditoría de backend:
-  ```bash
-  python scripts/backend_audit.py
-  ```
-
-### Fase 5: Auditoría de Calidad (QA Engineer Agent)
-- Ejecución de suite de pruebas rigurosa multiplataforma: `python scripts/qa_audit.py`
-- Emisión del reporte de calidad en `tests/qa_report.md`.
-
-### Fase 6: Integración y Despliegue (DevOps Engineer Agent)
-- El **DevOps Engineer Agent** ejecuta la verificación de infraestructura:
-  ```bash
-  python scripts/devops_audit.py
-  ```
-- Gestiona ramas `dev` y `main`, y ejecuta el pipeline de integración continua:
-  ```bash
-  python scripts/workflow_pipeline.py
-  ```
-
-### Fase 7: Despliegue a Producción (Firebase Hosting / GitHub Actions)
-- Sincroniza las ramas `dev` y `main` para detonar el despliegue automático a producción.
+### 🚀 Fase 4: Despliegue y Contenerización (DevOps Engineer Agent)
+- Interviene **únicamente si la Fase 3 es 100% exitosa**.
+- **DevOps Engineer Agent**: Infraestructura inmutable, transiciones seguras entre ramas (`dev` a `main`), contenerización mediante `Dockerfile` optimizado (Nginx Alpine) y ejecución del pipeline CI/CD en GitHub Actions.
+- **Compuerta 4**: Finaliza validando con `scripts/devops_audit.py`.
 
 ---
 
-## 🎨 Equipo de Agentes Especializados
+## 👥 Matriz de Roles y Responsabilidades
 
-### 💎 1. Rol del UI/UX Designer Agent
-- **Responsabilidad**: Definición del sistema de diseño Glassmorphism, ergonomía táctil, propuestas continuas de mejoras de usabilidad, tipografía y micro-interacciones.
-- **Auditoría**: `python scripts/ux_audit.py`
-
-### 💻 2. Rol del Frontend Developer Agent
-- **Responsabilidad**: Maquetación HTML5 Mobile-First, estilos CSS, JavaScript ES6+ e interactividad.
-- **Auditoría**: `python scripts/frontend_audit.py`
-
-### ⚙️ 3. Rol del Backend Developer Agent
-- **Responsabilidad**: Arquitectura de APIs RESTful, integración de servicios externos (Open-Meteo, Firebase, Leaflet), validación de endpoints, seguridad de datos (OWASP), lógica de negocio serverless, esquemas de datos y optimización de peticiones de red.
-- **Auditoría**: `python scripts/backend_audit.py`
-
-### 🛡️ 4. Rol del QA Engineer Agent
-- **Responsabilidad**: Auditoría de calidad Mobile-First, responsividad Android/iOS/Windows/Mac, accesibilidad y fidelidad del itinerario.
-- **Auditoría**: `python scripts/qa_audit.py`
-
-### 🚀 5. Rol del DevOps Engineer Agent
-- **Responsabilidad**: Mantenimiento de infraestructura CI/CD (GitHub Actions), Dockerization, control de versiones Git (`dev` / `main`), automatización del pipeline y despliegues continuos.
-- **Auditoría**: `python scripts/devops_audit.py`
+| Agente | Fase | Responsabilidad Principal | Script de Auditoría / Compuerta |
+|---|---|---|---|
+| **UI/UX Designer Agent** | Fase 1 (Paralelo) | Ergonomía táctil, Tokens Glassmorphism, Tipografía | `python scripts/ux_audit.py` |
+| **Backend Developer Agent** | Fase 1 (Paralelo) | Contratos de API, Open-Meteo, Firebase, OWASP | `python scripts/backend_audit.py` |
+| **Frontend Developer Agent** | Fase 2 | Maquetación HTML5 Mobile-First, CSS3, JS View | `python scripts/frontend_audit.py` |
+| **QA Engineer Agent** | Fase 3 | Pruebas destructivas, Responsividad, Loopback | `python scripts/qa_audit.py` |
+| **DevOps Engineer Agent** | Fase 4 | Docker Alpine, CI/CD Actions, Git dev/main | `python scripts/devops_audit.py` |
