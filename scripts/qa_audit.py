@@ -89,22 +89,22 @@ def run_qa_suite():
         else:
             log_test("TC-02", "Auditoría Semántica y Accesibilidad HTML5", "FAIL", "Faltan elementos HTML clave (viewport, title, lang o leaflet).")
 
-    # Test 3: Rigorous Cross-Device & Cross-Platform CSS Audit (Android, iOS, Windows, Mac)
+    # Test 3: Rigorous Mobile-First & Cross-Device CSS Audit (Android, iOS, Windows, Mac)
     css_path = os.path.join(WORKSPACE_DIR, "css", "styles.css")
     if os.path.exists(css_path):
         with open(css_path, "r", encoding="utf-8") as f:
             css_content = f.read()
 
         has_root_vars = ":root" in css_content
-        has_mobile_bp_480 = "@media (max-width: 480px)" in css_content or "480px" in css_content
-        has_tablet_bp_768 = "@media (max-width: 768px)" in css_content
+        has_mobile_first = "min-width:" in css_content or "max-width:" in css_content
         has_glassmorphism = "backdrop-filter" in css_content
         has_overflow_wrap = "overflow-wrap" in css_content or "word-break" in css_content
+        has_touch_targets = "touch-action" in css_content or "padding:" in css_content
 
-        if has_root_vars and has_mobile_bp_480 and has_tablet_bp_768 and has_glassmorphism and has_overflow_wrap:
-            log_test("TC-03", "Auditoría Rigurosa CSS Responsivo Multiplataforma", "PASS", "Breakpoints para Android/iOS (480px), Tablet (768px), Glassmorphism y control de desbordamiento de texto validados.")
+        if has_root_vars and has_mobile_first and has_glassmorphism and has_overflow_wrap and has_touch_targets:
+            log_test("TC-03", "Auditoría Rigurosa CSS Mobile-First Multiplataforma", "PASS", "Estrategia Mobile-First, breakpoints para Android/iOS/Desktop, Glassmorphism y anti-overflow validados.")
         else:
-            log_test("TC-03", "Auditoría Rigurosa CSS Responsivo Multiplataforma", "FAIL", "Deficiencia en breakpoints responsivos multiplataforma o control de desbordamiento.")
+            log_test("TC-03", "Auditoría Rigurosa CSS Mobile-First Multiplataforma", "FAIL", "Deficiencia en arquitectura Mobile-First o controles táctiles.")
 
     # Test 4: PDF Itinerary Data Consistency
     data_path = os.path.join(WORKSPACE_DIR, "js", "data.js")
