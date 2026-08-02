@@ -1197,7 +1197,7 @@ img {
 
 .friends-photo-card {
   position: relative;
-  height: 110px;
+  height: 175px;
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--glass-border);
