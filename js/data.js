@@ -36,7 +36,9 @@ const TRIP_DATA = {
           name: "Guarda de Equipaje (Bounce / LuggageHero)",
           address: "Cerca de Rua Ministro Viveiros de Castro",
           type: "Consigna de Mochilas",
-          desc: "Servicio de guardado por ~$5 USD/día para el último día tras dejar el departamento."
+          desc: "Servicio de guardado por ~$5 USD/día para el último día tras dejar el departamento.",
+          url: "#luggage-storage",
+          btnText: "Ver Consignas (Bounce / LuggageHero)"
         }
       ]
     },

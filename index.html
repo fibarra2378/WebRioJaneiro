@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
   <!-- Estilos de la Aplicación -->
-  <link rel="stylesheet" href="css/styles.css?v=10.0">
+  <link rel="stylesheet" href="css/styles.css?v=11.0">
 </head>
 
 <body>
@@ -43,10 +43,10 @@
     <!-- Menú Desplegable Flotante -->
     <ul class="nav-links" id="nav-links">
       <li><a href="#base-depto" class="nav-link"><i class="fa-solid fa-house-user"></i> Base Copacabana</a></li>
-      <li><a href="#itinerary-section" class="nav-link"><i class="fa-solid fa-calendar-days"></i> Itinerario 5 Días</a>
-      </li>
+      <li><a href="#itinerary-section" class="nav-link"><i class="fa-solid fa-calendar-days"></i> Itinerario 5 Días</a></li>
       <li><a href="#guide-tips-section" class="nav-link"><i class="fa-solid fa-lightbulb"></i> Tips del Guía</a></li>
       <li><a href="#budget-calculator" class="nav-link"><i class="fa-solid fa-calculator"></i> Presupuesto</a></li>
+      <li><a href="#luggage-storage" class="nav-link"><i class="fa-solid fa-suitcase"></i> Guarda de Equipaje</a></li>
       <li><a href="#map-section" class="nav-link"><i class="fa-solid fa-map-location-dot"></i> Mapa en Vivo</a></li>
     </ul>
   </nav>
@@ -163,85 +163,6 @@
 
       <div class="grid-3" id="services-grid">
         <!-- Renderizado por JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Sección de Guarda de Equipaje (Último Día) -->
-  <section class="section" id="luggage-storage">
-    <div class="container">
-      <div class="section-title-wrap">
-        <span class="section-badge"><i class="fa-solid fa-suitcase"></i> Logística de Salida</span>
-        <h2 class="section-title">🧳 Guarda de Equipaje — Último Día</h2>
-        <p class="section-subtitle">Consigna de mochilas cerca de Rua Ministro Viveiros de Castro para guardar el equipaje de forma segura tras dejar el departamento. Tarifa promedio: ~$5 USD/día.</p>
-      </div>
-
-      <div class="grid-3" id="luggage-services-grid">
-        <!-- Tarjeta 1: Bounce -->
-        <div class="glass-card luggage-card">
-          <div class="luggage-card-header">
-            <div class="luggage-service-icon" style="background: rgba(6, 182, 212, 0.15); color: var(--accent-teal);">
-              <i class="fa-solid fa-shield-halved"></i>
-            </div>
-            <div>
-              <h3 class="luggage-service-name">Bounce</h3>
-              <span class="luggage-service-tag">Red Global de Consignas</span>
-            </div>
-          </div>
-          <div class="luggage-card-body">
-            <div class="luggage-price-badge">Desde ~$4 USD / día</div>
-            <p class="luggage-desc">Puntos verificados cerca de Praça do Lido y Av. Nossa Senhora de Copacabana. Incluye protección para equipaje.</p>
-          </div>
-          <div class="luggage-card-footer">
-            <a href="https://bounce.com/" target="_blank" rel="noopener noreferrer" class="search-btn luggage-cta-btn" aria-label="Reservar consigna en Bounce">
-              <span>Reservar en Bounce</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- Tarjeta 2: LuggageHero -->
-        <div class="glass-card luggage-card">
-          <div class="luggage-card-header">
-            <div class="luggage-service-icon" style="background: rgba(245, 158, 11, 0.15); color: var(--accent-gold);">
-              <i class="fa-solid fa-clock-rotate-left"></i>
-            </div>
-            <div>
-              <h3 class="luggage-service-name">LuggageHero</h3>
-              <span class="luggage-service-tag">Pago por Hora o Día</span>
-            </div>
-          </div>
-          <div class="luggage-card-body">
-            <div class="luggage-price-badge">~$4.90 USD / día</div>
-            <p class="luggage-desc">Consignas en comercios y hoteles locales de Copacabana. Cancelación gratuita y sello de seguridad numerado.</p>
-          </div>
-          <div class="luggage-card-footer">
-            <a href="https://luggagehero.com/es/" target="_blank" rel="noopener noreferrer" class="search-btn luggage-cta-btn" style="background: var(--accent-gold); color: #0f172a;" aria-label="Reservar consigna en LuggageHero">
-              <span>Reservar en LuggageHero</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- Tarjeta 3: Nannybag -->
-        <div class="glass-card luggage-card">
-          <div class="luggage-card-header">
-            <div class="luggage-service-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">
-              <i class="fa-solid fa-store"></i>
-            </div>
-            <div>
-              <h3 class="luggage-service-name">Nannybag</h3>
-              <span class="luggage-service-tag">Tarifa Plana Accesible</span>
-            </div>
-          </div>
-          <div class="luggage-card-body">
-            <div class="luggage-price-badge">~$4 USD / día (20 BRL)</div>
-            <p class="luggage-desc">Red de tiendas locales ("Nannies") en Copacabana Posto 2. Tarifa fija por equipaje sin límite de tamaño.</p>
-          </div>
-          <div class="luggage-card-footer">
-            <a href="https://www.nannybag.com/es/" target="_blank" rel="noopener noreferrer" class="search-btn luggage-cta-btn" style="background: #10b981; color: #fff;" aria-label="Reservar consigna en Nannybag">
-              <span>Reservar en Nannybag</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -506,6 +427,85 @@
       </div>
     </section>
 
+  <!-- Sección de Guarda de Equipaje (Último Día) -->
+  <section class="section" id="luggage-storage">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-badge"><i class="fa-solid fa-suitcase"></i> Logística de Salida</span>
+        <h2 class="section-title">🧳 Guarda de Equipaje — Último Día</h2>
+        <p class="section-subtitle">Consigna de mochilas cerca de Rua Ministro Viveiros de Castro para guardar el equipaje de forma segura tras dejar el departamento. Tarifa promedio: ~$5 USD/día.</p>
+      </div>
+
+      <div class="grid-3" id="luggage-services-grid">
+        <!-- Tarjeta 1: Bounce -->
+        <div class="glass-card luggage-card">
+          <div class="luggage-card-header">
+            <div class="luggage-service-icon" style="background: rgba(6, 182, 212, 0.15); color: var(--accent-teal);">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div>
+              <h3 class="luggage-service-name">Bounce</h3>
+              <span class="luggage-service-tag">Red Global de Consignas</span>
+            </div>
+          </div>
+          <div class="luggage-card-body">
+            <div class="luggage-price-badge">Desde ~$4 USD / día</div>
+            <p class="luggage-desc">Puntos verificados cerca de Praça do Lido y Av. Nossa Senhora de Copacabana. Incluye protección para equipaje.</p>
+          </div>
+          <div class="luggage-card-footer">
+            <a href="https://bounce.com/" target="_blank" rel="noopener noreferrer" class="search-btn luggage-cta-btn" aria-label="Reservar consigna en Bounce">
+              <span>Reservar en Bounce</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Tarjeta 2: LuggageHero -->
+        <div class="glass-card luggage-card">
+          <div class="luggage-card-header">
+            <div class="luggage-service-icon" style="background: rgba(245, 158, 11, 0.15); color: var(--accent-gold);">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+            </div>
+            <div>
+              <h3 class="luggage-service-name">LuggageHero</h3>
+              <span class="luggage-service-tag">Pago por Hora o Día</span>
+            </div>
+          </div>
+          <div class="luggage-card-body">
+            <div class="luggage-price-badge">~$4.90 USD / día</div>
+            <p class="luggage-desc">Consignas en comercios y hoteles locales de Copacabana. Cancelación gratuita y sello de seguridad numerado.</p>
+          </div>
+          <div class="luggage-card-footer">
+            <a href="https://luggagehero.com/es/" target="_blank" rel="noopener noreferrer" class="search-btn luggage-cta-btn" style="background: var(--accent-gold); color: #0f172a;" aria-label="Reservar consigna en LuggageHero">
+              <span>Reservar en LuggageHero</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Tarjeta 3: Nannybag -->
+        <div class="glass-card luggage-card">
+          <div class="luggage-card-header">
+            <div class="luggage-service-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">
+              <i class="fa-solid fa-store"></i>
+            </div>
+            <div>
+              <h3 class="luggage-service-name">Nannybag</h3>
+              <span class="luggage-service-tag">Tarifa Plana Accesible</span>
+            </div>
+          </div>
+          <div class="luggage-card-body">
+            <div class="luggage-price-badge">~$4 USD / día (20 BRL)</div>
+            <p class="luggage-desc">Red de tiendas locales ("Nannies") en Copacabana Posto 2. Tarifa fija por equipaje sin límite de tamaño.</p>
+          </div>
+          <div class="luggage-card-footer">
+            <a href="https://www.nannybag.com/es/" target="_blank" rel="noopener noreferrer" class="search-btn luggage-cta-btn" style="background: #10b981; color: #fff;" aria-label="Reservar consigna en Nannybag">
+              <span>Reservar en Nannybag</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
     <!-- Sección del Mapa Interactivo -->
     <section class="section" id="map-section">
       <div class="container">
@@ -540,8 +540,8 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <!-- Scripts de la Aplicación -->
-  <script src="js/data.js?v=10.0"></script>
-  <script src="js/app.js?v=10.0"></script>
+  <script src="js/data.js?v=11.0"></script>
+  <script src="js/app.js?v=11.0"></script>
 </body>
 
 </html>
