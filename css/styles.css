@@ -200,6 +200,26 @@ img {
   width: 100%;
 }
 
+/* Base Map Image Wrapper */
+.base-map-wrapper {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  box-sizing: border-box;
+}
+
+.base-map-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* Carousel Component Styles (Mobile-First Architecture) */
 .carousel-wrapper {
   width: 100%;

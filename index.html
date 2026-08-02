@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
   <!-- Estilos de la Aplicación -->
-  <link rel="stylesheet" href="css/styles.css?v=8.0">
+  <link rel="stylesheet" href="css/styles.css?v=9.0">
 </head>
 
 <body>
@@ -153,39 +153,10 @@
                 class="fa-solid fa-person-walking-luggage"></i> A solo 4 minutos a pie (290 metros) de la playa y a 1
               cuadra de Praça do Lido.</p>
           </div>
-          <!-- Carrusel Interactivo de Imágenes (Mapa de Ruta y Foto Posto 2) -->
-          <div class="carousel-wrapper" id="base-carousel">
-            <div class="carousel-track" id="carousel-track">
-
-              <!-- Slide 1: Mapa de Ruta a Pie (Google Maps 290m) -->
-              <div class="carousel-slide">
-                <img src="assets/images/route_map_posto2.jpg" alt="Mapa de Ruta a Pie - Depto a Posto 2 (4 min)"
-                  loading="eager">
-                <span class="carousel-badge"><i class="fa-solid fa-walking"></i> Ruta: 4 min (290m)</span>
-              </div>
-
-              <!-- Slide 2: Playa de Copacabana Posto 2 -->
-              <div class="carousel-slide">
-                <img src="assets/images/copacabana_posto2.png" alt="Playa de Copacabana - Posto 2" loading="lazy">
-                <span class="carousel-badge"><i class="fa-solid fa-umbrella-beach"></i> Copacabana Posto 2</span>
-              </div>
-
-            </div>
-
-            <!-- Botones de Navegación del Carrusel -->
-            <button class="carousel-nav-btn carousel-nav-prev" id="carousel-prev-btn" aria-label="Imagen anterior">
-              <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <button class="carousel-nav-btn carousel-nav-next" id="carousel-next-btn" aria-label="Siguiente imagen">
-              <i class="fa-solid fa-chevron-right"></i>
-            </button>
-
-            <!-- Indicadores -->
-            <div class="carousel-dots" id="carousel-dots" aria-label="Navegación de diapositivas">
-              <button class="carousel-dot active" data-index="0" aria-label="Ir a diapositiva 1"></button>
-              <button class="carousel-dot" data-index="1" aria-label="Ir a diapositiva 2"></button>
-              <button class="carousel-dot" data-index="2" aria-label="Ir a diapositiva 3"></button>
-            </div>
+          <!-- Mapa de Ruta a Pie (Google Maps 290m) -->
+          <div class="base-map-wrapper">
+            <img src="assets/images/route_map_posto2.jpg" alt="Mapa de Ruta a Pie - Depto a Posto 2 (4 min)" loading="eager">
+            <span class="carousel-badge"><i class="fa-solid fa-walking"></i> Ruta: 4 min (290m)</span>
           </div>
         </div>
       </div>
@@ -490,8 +461,8 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <!-- Scripts de la Aplicación -->
-    <script src="js/data.js?v=8.0"></script>
-    <script src="js/app.js?v=8.0"></script>
+    <script src="js/data.js?v=9.0"></script>
+    <script src="js/app.js?v=9.0"></script>
 </body>
 
 </html>
