@@ -1,6 +1,6 @@
 # Guía de Agentes y Flujo de Trabajo (WebRioJaneiro)
 
-Este proyecto cuenta con un equipo de 4 agentes especializados (**UI/UX Designer**, **Frontend Developer**, **QA Engineer** y **DevOps Engineer**) que colaboran mediante un **Flujo de Trabajo Estándar Integrado de 4 Fases (UI/UX -> Frontend -> QA -> DevOps -> Deploy)** bajo una **Estrategia Obligatoria Mobile-First**.
+Este proyecto cuenta con un equipo de **5 agentes especializados** (**UI/UX Designer**, **Frontend Developer**, **Backend Developer**, **QA Engineer** y **DevOps Engineer**) que colaboran mediante un **Flujo de Trabajo Estándar Integrado de 5 Fases (UI/UX -> Frontend -> Backend -> QA -> DevOps -> Deploy)** bajo una **Estrategia Obligatoria Mobile-First**.
 
 ---
 
@@ -13,18 +13,19 @@ Este proyecto cuenta con un equipo de 4 agentes especializados (**UI/UX Designer
 
 ---
 
-## 🔄 Flujo de Trabajo Estándar Integrado (5 Fases)
+## 🔄 Flujo de Trabajo Estándar Integrado (6 Fases)
 
 ```mermaid
 graph TD
     A[1. Solicitud de Cambio / Requerimiento] --> B[2. UI/UX Designer Agent: Auditoría de Diseño & Especificaciones]
     B --> C[3. Frontend Developer Agent: Desarrollo & Audit Frontend]
-    C --> D[4. QA Engineer Agent: Suite de Pruebas Multiplataforma]
-    D --> E{¿Defectos Detectados?}
-    E -- Sí --> F[Registro de Defectos & Corrección Frontend]
-    F --> D
-    E -- No --> G[5. DevOps Engineer Agent: Pipeline CI/CD, Docker & Git]
-    G --> H[6. Despliegue Exitoso a Producción / Firebase / Pages]
+    C --> D[4. Backend Developer Agent: APIs, Seguridad & Datos]
+    D --> E[5. QA Engineer Agent: Suite de Pruebas Multiplataforma]
+    E --> F{¿Defectos Detectados?}
+    F -- Sí --> G[Registro de Defectos & Corrección]
+    G --> E
+    F -- No --> H[6. DevOps Engineer Agent: Pipeline CI/CD, Docker & Git]
+    H --> I[7. Despliegue Exitoso a Producción / Firebase / Pages]
 ```
 
 ### Fase 1: Solicitud de Cambio (CR)
@@ -39,11 +40,19 @@ graph TD
 - Implementa el código en HTML5 semántico, CSS3 Mobile-First, JS ES6+ modular o datos.
 - Ejecución de auditoría de desarrollo: `python scripts/frontend_audit.py`
 
-### Fase 4: Auditoría de Calidad (QA Engineer Agent)
+### Fase 4: Desarrollo Backend & Integraciones (Backend Developer Agent)
+- Valida las integraciones con APIs externas (Open-Meteo, Leaflet, Firebase).
+- Audita la seguridad de enlaces externos, configuración de Firebase y esquemas de datos.
+- Ejecución de auditoría de backend:
+  ```bash
+  python scripts/backend_audit.py
+  ```
+
+### Fase 5: Auditoría de Calidad (QA Engineer Agent)
 - Ejecución de suite de pruebas rigurosa multiplataforma: `python scripts/qa_audit.py`
 - Emisión del reporte de calidad en `tests/qa_report.md`.
 
-### Fase 5: Integración y Despliegue (DevOps Engineer Agent)
+### Fase 6: Integración y Despliegue (DevOps Engineer Agent)
 - El **DevOps Engineer Agent** ejecuta la verificación de infraestructura:
   ```bash
   python scripts/devops_audit.py
@@ -53,7 +62,7 @@ graph TD
   python scripts/workflow_pipeline.py
   ```
 
-### Fase 6: Despliegue a Producción (Firebase Hosting / GitHub Actions)
+### Fase 7: Despliegue a Producción (Firebase Hosting / GitHub Actions)
 - Sincroniza las ramas `dev` y `main` para detonar el despliegue automático a producción.
 
 ---
@@ -68,10 +77,14 @@ graph TD
 - **Responsabilidad**: Maquetación HTML5 Mobile-First, estilos CSS, JavaScript ES6+ e interactividad.
 - **Auditoría**: `python scripts/frontend_audit.py`
 
-### 🛡️ 3. Rol del QA Engineer Agent
+### ⚙️ 3. Rol del Backend Developer Agent
+- **Responsabilidad**: Arquitectura de APIs RESTful, integración de servicios externos (Open-Meteo, Firebase, Leaflet), validación de endpoints, seguridad de datos (OWASP), lógica de negocio serverless, esquemas de datos y optimización de peticiones de red.
+- **Auditoría**: `python scripts/backend_audit.py`
+
+### 🛡️ 4. Rol del QA Engineer Agent
 - **Responsabilidad**: Auditoría de calidad Mobile-First, responsividad Android/iOS/Windows/Mac, accesibilidad y fidelidad del itinerario.
 - **Auditoría**: `python scripts/qa_audit.py`
 
-### 🚀 4. Rol del DevOps Engineer Agent
+### 🚀 5. Rol del DevOps Engineer Agent
 - **Responsabilidad**: Mantenimiento de infraestructura CI/CD (GitHub Actions), Dockerization, control de versiones Git (`dev` / `main`), automatización del pipeline y despliegues continuos.
 - **Auditoría**: `python scripts/devops_audit.py`
