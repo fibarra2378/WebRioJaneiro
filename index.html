@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
   <!-- Estilos de la Aplicación -->
-  <link rel="stylesheet" href="css/styles.css?v=3.0">
+  <link rel="stylesheet" href="css/styles.css?v=4.0">
 </head>
 
 <body>
@@ -66,10 +66,10 @@
             <i class="fa-regular fa-clock widget-icon"></i>
             <span>Hora en Río: <strong id="rio-clock-time">--:-- BRT</strong></span>
           </div>
-          <div class="widget-pill">
+          <a href="#weather-forecast" class="widget-pill" style="text-decoration: none; color: inherit;" title="Ver pronóstico de 10 días">
             <i class="fa-solid fa-temperature-three-quarters widget-icon" style="color: var(--accent-gold);"></i>
-            <span>Clima Esperado: <strong>18°C - 26°C (Suave y seco)</strong></span>
-          </div>
+            <span>Clima en Río: <strong id="hero-weather-text">Cargando...</strong> <i class="fa-solid fa-arrow-down" style="font-size: 0.75rem; color: var(--accent-teal); margin-left: 0.35rem;"></i></span>
+          </a>
           <div class="widget-pill">
             <i class="fa-solid fa-house-user widget-icon" style="color: var(--accent-teal);"></i>
             <span>Base: <strong>Copacabana Posto 2</strong></span>
@@ -241,6 +241,47 @@
         </div>
       </div>
     </div>
+  <!-- Sección del Clima Dinámico y Pronóstico 10 Días (Open-Meteo API) -->
+  <section class="section" id="weather-forecast">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-badge"><i class="fa-solid fa-cloud-sun"></i> Tiempo Real & Pronóstico</span>
+        <h2 class="section-title">Clima en Río de Janeiro</h2>
+        <p class="section-subtitle">Pronóstico en tiempo real y previsión meteorológica para los próximos 10 días en Copacabana.</p>
+      </div>
+
+      <div class="glass-card" style="padding: 1.75rem; border-left: 6px solid var(--accent-gold);">
+        <!-- Tarjeta Clima Actual -->
+        <div class="current-weather-card" id="current-weather-card">
+          <div class="current-weather-main">
+            <div class="current-weather-icon-wrap" id="current-weather-icon-wrap">
+              <i class="fa-solid fa-sun"></i>
+            </div>
+            <div>
+              <div class="current-weather-temp" id="current-weather-temp">--°C</div>
+              <div class="current-weather-desc" id="current-weather-desc">Cargando tiempo en vivo...</div>
+            </div>
+          </div>
+          <div class="current-weather-meta">
+            <div><i class="fa-solid fa-location-dot" style="color: var(--accent-teal);"></i> <strong>Río de Janeiro (Copacabana)</strong></div>
+            <div><i class="fa-solid fa-wind" style="color: var(--text-muted);"></i> Viento: <strong id="current-weather-wind">-- km/h</strong></div>
+          </div>
+        </div>
+
+        <!-- Pronóstico 10 Días (Carrusel Horizontal Deslizable Native Scroll-Snap) -->
+        <div class="weather-forecast-header">
+          <h3><i class="fa-solid fa-calendar-week" style="color: var(--accent-teal);"></i> Pronóstico de los Próximos 10 Días</h3>
+          <span class="swipe-hint"><i class="fa-solid fa-hand-pointer"></i> Desliza horizontalmente</span>
+        </div>
+
+        <div class="weather-scroll-container" id="weather-scroll-container">
+          <!-- Renderizado dinámico desde JS con Open-Meteo API -->
+          <div class="weather-day-card">
+            <div class="weather-day-date">Cargando...</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Sección del Mapa Interactivo -->
@@ -277,8 +318,8 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <!-- Scripts de la Aplicación -->
-  <script src="js/data.js?v=3.0"></script>
-  <script src="js/app.js?v=3.0"></script>
+  <script src="js/data.js?v=4.0"></script>
+  <script src="js/app.js?v=4.0"></script>
 </body>
 
 </html>

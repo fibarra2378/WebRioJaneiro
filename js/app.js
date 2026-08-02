@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicialización (Modo Oscuro Permanente)
   document.documentElement.setAttribute('data-theme', 'dark');
   initLiveClock();
+  initOpenMeteoWeather();
   initMobileMenu();
   initCarousel();
   renderBaseServices();
@@ -350,5 +351,109 @@ document.addEventListener('DOMContentLoaded', () => {
         if (icon) icon.className = 'fa-solid fa-bars';
       });
     });
+  }
+
+  /* ==========================================================
+     Consumo de API Open-Meteo para Clima de Río de Janeiro
+     ========================================================== */
+  async function initOpenMeteoWeather() {
+    const lat = -22.9068;
+    const lon = -43.1729;
+    const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode&forecast_days=10&timezone=America%2FSao_Paulo`;
+
+    const weatherCodeMap = {
+      0: { label: "Despejado / Sol", icon: "fa-sun", color: "#f59e0b" },
+      1: { label: "Principalmente Despejado", icon: "fa-cloud-sun", color: "#f59e0b" },
+      2: { label: "Parcialmente Nublado", icon: "fa-cloud-sun", color: "#f59e0b" },
+      3: { label: "Nublado", icon: "fa-cloud", color: "#94a3b8" },
+      45: { label: "Neblina", icon: "fa-smog", color: "#94a3b8" },
+      48: { label: "Neblina Escarchada", icon: "fa-smog", color: "#94a3b8" },
+      51: { label: "Llovizna Ligera", icon: "fa-cloud-rain", color: "#06b6d4" },
+      53: { label: "Llovizna Moderada", icon: "fa-cloud-rain", color: "#06b6d4" },
+      55: { label: "Llovizna Densa", icon: "fa-cloud-showers-heavy", color: "#06b6d4" },
+      61: { label: "Lluvia Ligera", icon: "fa-cloud-rain", color: "#06b6d4" },
+      63: { label: "Lluvia Moderada", icon: "fa-cloud-showers-heavy", color: "#06b6d4" },
+      65: { label: "Lluvia Fuerte", icon: "fa-cloud-showers-heavy", color: "#06b6d4" },
+      80: { label: "Chubascos Ligeros", icon: "fa-cloud-sun-rain", color: "#06b6d4" },
+      81: { label: "Chubascos Moderados", icon: "fa-cloud-showers-heavy", color: "#06b6d4" },
+      82: { label: "Chubascos Violentos", icon: "fa-cloud-showers-water", color: "#06b6d4" },
+      95: { label: "Tormenta Eléctrica", icon: "fa-bolt", color: "#ef4444" },
+      96: { label: "Tormenta con Granizo", icon: "fa-bolt", color: "#ef4444" }
+    };
+
+    function getWeatherMeta(code) {
+      return weatherCodeMap[code] || { label: "Tiempo Suave", icon: "fa-cloud-sun", color: "#f59e0b" };
+    }
+
+    try {
+      const response = await fetch(apiUrl);
+      if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
+      const data = await response.json();
+
+      // Current Weather
+      const current = data.current_weather;
+      if (current) {
+        const meta = getWeatherMeta(current.weathercode);
+        const tempRounded = Math.round(current.temperature);
+
+        const heroWidgetText = document.getElementById('hero-weather-text');
+        if (heroWidgetText) {
+          heroWidgetText.innerHTML = `${tempRounded}°C (${meta.label})`;
+        }
+
+        const tempEl = document.getElementById('current-weather-temp');
+        const descEl = document.getElementById('current-weather-desc');
+        const iconWrapEl = document.getElementById('current-weather-icon-wrap');
+        const windEl = document.getElementById('current-weather-wind');
+
+        if (tempEl) tempEl.textContent = `${tempRounded}°C`;
+        if (descEl) descEl.textContent = meta.label;
+        if (windEl) windEl.textContent = `${current.windspeed} km/h`;
+        if (iconWrapEl) {
+          iconWrapEl.innerHTML = `<i class="fa-solid ${meta.icon}"></i>`;
+          iconWrapEl.style.color = meta.color;
+        }
+      }
+
+      // 10-Day Forecast Carousel
+      const daily = data.daily;
+      const scrollContainer = document.getElementById('weather-scroll-container');
+      if (daily && daily.time && scrollContainer) {
+        scrollContainer.innerHTML = '';
+
+        daily.time.forEach((dateStr, index) => {
+          const maxTemp = Math.round(daily.temperature_2m_max[index]);
+          const minTemp = Math.round(daily.temperature_2m_min[index]);
+          const code = daily.weathercode[index];
+          const meta = getWeatherMeta(code);
+
+          const dateObj = new Date(dateStr + 'T00:00:00');
+          const dayName = dateObj.toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' });
+
+          const dayCard = document.createElement('div');
+          dayCard.className = 'weather-day-card';
+          dayCard.innerHTML = `
+            <div class="weather-day-date">${dayName}</div>
+            <div class="weather-day-icon" style="color: ${meta.color};"><i class="fa-solid ${meta.icon}"></i></div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: 600;">${meta.label}</div>
+            <div class="weather-day-temps">
+              <span class="weather-day-max">${maxTemp}°</span>
+              <span class="weather-day-min">${minTemp}°</span>
+            </div>
+          `;
+          scrollContainer.appendChild(dayCard);
+        });
+      }
+    } catch (err) {
+      console.warn('Error al cargar clima Open-Meteo:', err);
+      const scrollContainer = document.getElementById('weather-scroll-container');
+      if (scrollContainer) {
+        scrollContainer.innerHTML = `
+          <div style="padding: 1rem; color: var(--text-muted); font-size: 0.9rem;">
+            <i class="fa-solid fa-cloud-sun"></i> Clima estimado en Río: 18°C - 26°C (Suave y seco).
+          </div>
+        `;
+      }
+    }
   }
 });
