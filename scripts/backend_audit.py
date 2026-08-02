@@ -149,6 +149,7 @@ def run_backend_audit():
             ("baseOfOperations", "baseOfOperations"),
             ("nearbyServices", "nearbyServices"),
             ("guideTips", "guideTips"),
+            ("topRioTours", "topRioTours"),
         ]
 
         for schema_name, pattern in required_schemas:
