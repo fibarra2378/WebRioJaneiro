@@ -336,5 +336,16 @@ const TRIP_DATA = {
       description: "Auténtica rueda de samba al aire libre en la cuna histórica de la cultura afrobrasileña en Saúde, con caipirinhas locales.",
       bookingUrl: "https://visit.rio/"
     }
-  ]
+  ],
+
+  /**
+   * Datos Financieros del Viaje — Fuente Única de Verdad
+   * Actualizar antes del viaje consultando: https://www.xe.com/currencyconverter/ o Banco Central de Brasil
+   */
+  financials: {
+    exchangeRateBRL_USD: 5.2,       // Tasa de referencia BRL → USD (actualizar antes del viaje)
+    baseBudgetPerPersonBRL: 1200,   // Presupuesto base estimado por persona para 5 días
+    lastUpdated: "2026-08-03",      // Fecha de última actualización de la tasa
+    sourceNote: "Tasa referencial. Consultar XE.com o BCB para valor actualizado al día del viaje."
+  }
 };
