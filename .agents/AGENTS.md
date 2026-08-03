@@ -61,8 +61,9 @@ graph TD
 
 ## 👥 Matriz de Roles y Responsabilidades
 
-| Agente | Fase | Responsabilidad Principal | Script de Auditoría / Compuerta |
+| Agente | Fase / Modalidad | Responsabilidad Principal | Script de Auditoría / Compuerta |
 |---|---|---|---|
+| **Software Architect Agent** | Consultivo (Ad-Hoc) | Revisión holística de arquitectura, patrones SOLID, deuda técnica y seguridad OWASP | `python scripts/architect_audit.py` |
 | **UI/UX Designer Agent** | Fase 1 (Paralelo) | Ergonomía táctil, Tokens Glassmorphism, Tipografía | `python scripts/ux_audit.py` |
 | **Backend Developer Agent** | Fase 1 (Paralelo) | Contratos de API, Open-Meteo, Firebase, OWASP | `python scripts/backend_audit.py` |
 | **Frontend Developer Agent** | Fase 2 | Maquetación HTML5 Mobile-First, CSS3, JS View | `python scripts/frontend_audit.py` |
