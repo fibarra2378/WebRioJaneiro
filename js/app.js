@@ -1,7 +1,26 @@
 /**
  * WebRioJaneiro - Lógica de la Aplicación del Itinerario 4 Amigos (Agosto 2026)
  * Gestiona navegación por días, alternativas, servicios de base, mapa Leaflet con marcadores del PDF, sintetizador de voz y calculadora.
+ *
+ * Arquitectura:
+ * - escapeHtml(): Sanitiza valores dinámicos antes de inyectarlos vía innerHTML (P-05 OWASP XSS)
+ * - TRIP_DATA.financials: Fuente de datos para la calculadora de presupuesto (P-04)
+ * - clearInterval() en visibilitychange: Previene fuga de memoria del carrusel (P-11)
  */
+
+/* ==========================================================
+   Utilidad de Seguridad: Escape HTML (P-05 — Prevención XSS)
+   Sanitiza cualquier string antes de inyectarlo en innerHTML.
+   ========================================================== */
+function escapeHtml(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   // Estado de la Aplicación
@@ -163,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             ` : ''}
             ${slot.url ? `
-              <a href="${slot.url}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; color: var(--accent-teal); font-weight: 700; margin-top: 0.5rem; text-decoration: underline;">
+              <a href="${escapeHtml(slot.url)}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; color: var(--accent-teal); font-weight: 700; margin-top: 0.5rem; text-decoration: underline;">
                 <i class="fa-solid fa-arrow-up-right-from-square"></i> Comprar Boletos Online
               </a>
             ` : ''}
@@ -199,27 +218,30 @@ document.addEventListener('DOMContentLoaded', () => {
   function initCalculator() {
     if (!calcPeople || !calcCurrency || !calcTotalAmount || !calcBreakdown) return;
 
+    // Leer constantes financieras desde la fuente de verdad centralizada (js/data.js)
+    const financials = TRIP_DATA.financials || {};
+    const basePerPersonBRL = financials.baseBudgetPerPersonBRL || 1200;
+    const rateUSD = financials.exchangeRateBRL_USD || 5.2;
+
     function updateCalc() {
       const people = parseInt(calcPeople.value, 10);
       const curr = calcCurrency.value;
 
-      const basePerPersonBRL = 1200;
       const totalBRL = basePerPersonBRL * people;
 
       if (curr === 'BRL') {
         calcTotalAmount.textContent = `R$ ${totalBRL.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-        calcBreakdown.innerHTML = people === 1 
-          ? `Presupuesto estimado individual de <strong>R$ 1,200.00</strong> para 5 días en Río.`
+        calcBreakdown.innerHTML = people === 1
+          ? `Presupuesto estimado individual de <strong>R$ ${basePerPersonBRL.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong> para 5 días en Río.`
           : `Equivalente a <strong>R$ ${basePerPersonBRL.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} por amigo</strong> para los 5 días en Río.`;
       } else {
-        const rateUSD = 5.2;
         const totalUSD = totalBRL / rateUSD;
         const perPersonUSD = basePerPersonBRL / rateUSD;
 
         calcTotalAmount.textContent = `USD $ ${totalUSD.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
         calcBreakdown.innerHTML = people === 1
           ? `Presupuesto estimado individual de <strong>USD $ ${perPersonUSD.toFixed(2)}</strong> para 5 días.`
-          : `Equivalente a <strong>USD $ ${perPersonUSD.toFixed(2)} por amigo</strong> (~$230 USD por persona para los 5 días).`;
+          : `Equivalente a <strong>USD $ ${perPersonUSD.toFixed(2)} por amigo</strong> (~$${perPersonUSD.toFixed(0)} USD por persona para los 5 días).`;
       }
     }
 
@@ -333,7 +355,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    setInterval(() => goToSlide(currentIndex + 1), 6000);
+    // P-11: Guardar referencia y limpiar setInterval cuando la pestaña queda oculta (prevención de fuga de memoria)
+    const autoplayInterval = setInterval(() => goToSlide(currentIndex + 1), 6000);
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) clearInterval(autoplayInterval);
+    });
   }
 
   /* ==========================================================
